@@ -7,7 +7,6 @@ App = require("app.json"); // Used for configuration and by Heroku
 
 // Includes termination condition
 app.is_solution = require("./is_solution.js");
-
 // Other configuration variables 
 app.config = App.new(__dirname + "/app.json");
 

@@ -1,25 +1,4 @@
-function tabify ( x, l, a, b, z ) {
-    var tab = "<table style='border:1px solid black;padding:0;margin:0;width:100%'><tr>";
-    for ( var i = 0; i < x.length; i+=4 ) {
-	tab += "<td style='background-color:";
-	var this_substr = x.substr(  i, l );
-	var num_ones = 0;
-	for ( var j = 0;  j < this_substr.length; j++ ) {
-	  num_ones += (this_substr.substring(j,j+1) === "1"); 
-	}
-	var this_result;
-	if ( num_ones <= z ) {
-	  this_result = a*(z-num_ones)/z;
-	} else {
-	  this_result = b*(num_ones -z)/(l-z);
-	}
-	
-	var colors=['white','lightgray','darkgray','darkslategray','black'];
-	tab += colors[this_result*2]+"'> </td>";
-    }
-    tab += "</tr></table>";
-    return tab;
-}
+
 
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var o;"undefined"!=typeof window?o=window:"undefined"!=typeof global?o=global:"undefined"!=typeof self&&(o=self),o.nodeo=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process){
@@ -44,66 +23,16 @@ function tabify ( x, l, a, b, z ) {
     var eo = new Classic( { population_size: population_size,
 			    chromosome_size: chromosome_size,
 			    fitness_func: trap_fitness } );
-    
-    // get line chart canvas
-    var fitness = document.getElementById('fitness').getContext('2d');
-    fitness.canvas.width=document.getElementById('canvas').clientWidth*0.9;
-    fitness.canvas.height=document.getElementById('canvas').clientHeight*0.8;
-
-    // get #IPs chart canvas
-    var IPs = document.getElementById('IPs').getContext('2d');
-    IPs.canvas.width=document.getElementById('ips_canvas').clientWidth*0.9;
-    IPs.canvas.height=document.getElementById('ips_canvas').clientHeight*0.7;
-
-    // Chart data
-    var this_chart = new Chart(fitness,  { 
-	responsive: true,
-	maintainAspectRatio: true
-    });
-    var fitness_data = {
-        labels : [],
-        datasets : [
-            {
-                fillColor : "rgba(172,194,132,0.4)",
-                strokeColor : "#ACC26D",
-                pointColor : "#fff",
-                pointStrokeColor : "#9DB86D",
-                data : []
-            }
-        ]
-    };
-
-    // Data for IPs.
-    var ips_chart = new Chart(IPs,  { 
-	responsive: true,
-	maintainAspectRatio: true
-    });
-    var ips_data = {
-        labels : [],
-        datasets : [
-            {
-                fillColor : "rgba(160,204,182,0.4)",
-                strokeColor : "#ACC26D",
-                pointColor : "#ddd",
-                pointStrokeColor : "#9DB86D",
-                data : []
-            }
-        ]
-    };
+   
 
     var generation_count=0;
-    var best_div = document.getElementById('best');
+
     (function do_ea() {
 	eo.generation();
-	best_div.innerHTML=tabify( eo.population[0].string, trap_len,1, trap_b, trap_len -1 );
 	generation_count++;
 	if ( (generation_count % period === 0) ) {
 	    console.log(generation_count);
 	    
-	    // chart fitness
-	    fitness_data.labels.push(generation_count);
-	    fitness_data.datasets[0].data.push(eo.population[0].fitness);
-	    this_chart.Line(fitness_data);
 
 	    // gets a random chromosome from the pool
 	    $.get("/random", function( data ) {
@@ -119,9 +48,10 @@ function tabify ( x, l, a, b, z ) {
 
 	    // Tracks the number of IPs
 	    $.get("/IPs", function( data ) {
-		ips_data.labels.push(generation_count);
-		ips_data.datasets[0].data.push( Object.keys( data ).length );
-		ips_chart.Line(ips_data);
+
+		//ips_data.labels.push(generation_count);
+		//ips_data.datasets[0].data.push( Object.keys( data ).length );
+		//ips_chart.Line(ips_data);
 	    });
 	}
 	
