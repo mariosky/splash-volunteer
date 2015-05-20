@@ -82,6 +82,80 @@
     <script type="text/javascript" src='js/trapWorker.js'></script>
    -->
    <script>
+
+function tabify ( x, l, a, b, z ) {
+    var tab = "<table style='border:1px solid black;padding:0;margin:0;width:100%'><tr>";
+    for ( var i = 0; i < x.length; i+=4 ) {
+  tab += "<td style='background-color:";
+  var this_substr = x.substr(  i, l );
+  var num_ones = 0;
+  for ( var j = 0;  j < this_substr.length; j++ ) {
+    num_ones += (this_substr.substring(j,j+1) === "1"); 
+  }
+  var this_result;
+  if ( num_ones <= z ) {
+    this_result = a*(z-num_ones)/z;
+  } else {
+    this_result = b*(num_ones -z)/(l-z);
+  }
+  
+  var colors=['white','lightgray','darkgray','darkslategray','black'];
+  tab += colors[this_result*2]+"'> </td>";
+    }
+    tab += "</tr></table>";
+    return tab;
+}
+
+// get line chart canvas
+    var fitness = document.getElementById('fitness').getContext('2d');
+    fitness.canvas.width=document.getElementById('canvas').clientWidth*0.9;
+    fitness.canvas.height=document.getElementById('canvas').clientHeight*0.8;
+
+    // get #IPs chart canvas
+    var IPs = document.getElementById('IPs').getContext('2d');
+    IPs.canvas.width=document.getElementById('ips_canvas').clientWidth*0.9;
+    IPs.canvas.height=document.getElementById('ips_canvas').clientHeight*0.7;
+
+    // Chart data
+    var this_chart = new Chart(fitness,  { 
+  responsive: true,
+  maintainAspectRatio: true
+    });
+    var fitness_data = {
+        labels : [],
+        datasets : [
+            {
+                fillColor : "rgba(172,194,132,0.4)",
+                strokeColor : "#ACC26D",
+                pointColor : "#fff",
+                pointStrokeColor : "#9DB86D",
+                data : []
+            }
+        ]
+    };
+
+    // Data for IPs.
+    var ips_chart = new Chart(IPs,  { 
+  responsive: true,
+  maintainAspectRatio: true
+    });
+    var ips_data = {
+        labels : [],
+        datasets : [
+            {
+                fillColor : "rgba(160,204,182,0.4)",
+                strokeColor : "#ACC26D",
+                pointColor : "#ddd",
+                pointStrokeColor : "#9DB86D",
+                data : []
+            }
+        ]
+    };
+
+var best_div = document.getElementById('best');
+
+
+
    $( document ).ready(function() {
   // Handler for .ready() called.
 var worker = new Worker('js/trapWorker.js');
@@ -89,6 +163,19 @@ var worker = new Worker('js/trapWorker.js');
   worker.addEventListener('message', function(e) {
 
   	document.getElementById('footer').textContent =  e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
+
+    // chart fitness
+    fitness_data.labels.push(e.data.generation_count);
+    fitness_data.datasets[0].data.push(e.data.fitness);
+    this_chart.Line(fitness_data);
+    
+     // Tracks the number of IPs
+    ips_data.labels.push(e.data.generation_count);
+    ips_data.datasets[0].data.push( e.data.ips );
+    ips_chart.Line(ips_data);
+
+    best_div.innerHTML=tabify( eo.population[0].string, trap_len,1, trap_b, trap_len -1 );
+
 
 
   }, false);
