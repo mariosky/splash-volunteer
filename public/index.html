@@ -152,8 +152,6 @@ function tabify ( x, l, a, b, z ) {
         ]
     };
 
-var best_div = document.getElementById('best');
-
 
 
    $( document ).ready(function() {
@@ -174,7 +172,9 @@ var worker = new Worker('js/trapWorker.js');
     ips_data.datasets[0].data.push( e.data.ips );
     ips_chart.Line(ips_data);
 
-    best_div.innerHTML=tabify( eo.population[0].string, trap_len,1, trap_b, trap_len -1 );
+    
+    
+    $("#best").html( tabify( e.data.best, trap_len,1, trap_b, trap_len -1 ));
 
 
 
