@@ -78,7 +78,32 @@
     <footer id="footer">
       <p class='text-centered'>Grab the code and data in <a href='https://github.com/JJ/splash-volunteer'>GitHub</a>. This is free software under the <a href='http://www.gnu.org/licenses/'>Affero GPL license</a>.</p>
     </footer>
+ <!--
     <script type="text/javascript" src='js/trapWorker.js'></script>
+   -->
+   <script>
+   $( document ).ready(function() {
+  // Handler for .ready() called.
+var worker = new Worker('js/trapWorker.js');
+
+  worker.addEventListener('message', function(e) {
+
+    document.getElementById('footer').textContent =  e.data.generation_count +"/"+ e.data.best+"/"+ e.data.fitness;
+  }, false);
+
+
+  worker.postMessage({'cmd': 'start'});
+  worker.postMessage({'cmd': 'evolve'});
+
+	
+
+	});
+
+
+  
+
+  </script>
+
 
     </body>
     </html>
