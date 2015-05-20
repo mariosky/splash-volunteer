@@ -3,8 +3,10 @@
 self.addEventListener('message', function(e) {
   var data = e.data;
   switch (data.cmd) {
+
     case 'start':
-        start();
+        postMessage(data.cmd);
+        start(data.config);
         postMessage('WORKER STARTED');
         break;
     case 'evolve':
@@ -17,13 +19,13 @@ self.addEventListener('message', function(e) {
 
 
 
-function start(){
+function start(config){
 	
-    var population_size = 128;
-        period = 100;
-        traps = 40;
-    var trap_len = 4;
-        trap_b =  2;
+    var population_size = config.population_size;
+        period = config.period;
+        traps = config.traps;
+    var trap_len = config.trap_len;
+        trap_b =  config.trap_b;
     var chromosome_size = traps*trap_len;
     
     var trap_fitness = new trap.Trap(  { "l": trap_len, 
@@ -42,14 +44,8 @@ function start(){
 
 function do_ea() {
     eo.generation();
-
-    
-
     if ( (eo.generation_count % period === 0) ) {
-        postMessage( 
-            {generation_count:eo.generation_count, 
-             best:eo.population[0].string, 
-             fitness:eo.population[0].fitness});
+        
     
         // gets a random chromosome from the pool
         var xmlhttp = new XMLHttpRequest();
@@ -74,14 +70,28 @@ function do_ea() {
         //IPs
         var xmlhttp3 = new XMLHttpRequest();
         var url = "/IPs";
+        var ips = "";
         xmlhttp3.onreadystatechange = function() {
             if (xmlhttp3.readyState == 4 && xmlhttp3.status == 200) {
                 var data = JSON.parse(xmlhttp3.responseText);
+                ips = Object.keys( data ).length;
+
+
+                postMessage( 
+                {   generation_count:eo.generation_count, 
+                    best:eo.population[0].string, 
+                    fitness:eo.population[0].fitness,'period':period,'ips':ips
+                    });
+
+
                 }
 
             }
         xmlhttp3.open("GET", url, true);
         xmlhttp3.send();
+
+
+       
     }
 
     if ( eo.population[0].fitness < traps*trap_b ) {

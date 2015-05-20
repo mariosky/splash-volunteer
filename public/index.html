@@ -88,11 +88,19 @@ var worker = new Worker('js/trapWorker.js');
 
   worker.addEventListener('message', function(e) {
 
-    document.getElementById('footer').textContent =  e.data.generation_count +"/"+ e.data.best+"/"+ e.data.fitness;
+  	document.getElementById('footer').textContent =  e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
+
+
   }, false);
 
-
-  worker.postMessage({'cmd': 'start'});
+  	var config = {	
+    	population_size : 128,
+        period :  100,
+        traps : 40,
+    	trap_len : 4,
+        trap_b :  2
+	}
+  worker.postMessage({'cmd': 'start', 'config': config});
   worker.postMessage({'cmd': 'evolve'});
 
 	
