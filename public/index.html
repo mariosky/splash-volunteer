@@ -1,86 +1,129 @@
 
+
 <!DOCTYPE html>
-<html>
-    <head>
-      <title>Distributed Evolutionary Algorithm</title>
-     
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-     
-    <link rel="stylesheet" href="css/kube.min.css" />
-    <link rel="stylesheet" href="css/extra.css" />
-     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Distributed Evolutionary Algorithm</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <script src="js/kube.min.js"></script>
-     
-    <!-- for Chart http://devcrapshoot.com/javascript/nodejs-expressjs-and-mustachejs-template-engine -->
+
+
     <script type="text/javascript" src='js/Chart.min.js'></script>
 
-    </head>
-    <body>
-      <header id='header'>
-	<h1>An experiment in distributed evolutionary computation</h1>
-      </header>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+<style>
 
-    <div id='main'>
-      <div class='units-row'>
-	<div class='unit-50' id='canvas'>
-	  <h2><i class="fa fa-bar-chart"></i> How are we doing</h2>
-	  <canvas id="fitness" style='width:95%;height:80%'></canvas>
-	</div>
-	
-	<div class='unit-50' id='ips_canvas'>
-	  <h2><i class="fa fa-line-chart"></i> How many are out there</h2>
-	  <canvas id="IPs" style='width:95%;height:80%'></canvas>
-	</div>
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+</style>
+
+  </head>
+  <body>
+
+<div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">An experiment in distributed evolutionary computation</h3>
       </div>
-      
-      <div class='units-row'>
-	<div class='unit-10'><h2> Best</h2></div>
-	<div class='unit-80' id='best'></div>
-	<div class='unit-10'><h2><i class="fa fa-bar-chart"></i></h2></div>
-      </div>
-      <div class='units-row'>
 
-	<div class='unit-70'>
-	  <h2><i class="fa fa-file-text-o"></i>About this</h2>
+                    <h1 class="page-header">How are we doing?</h1>
+   <div class="row">
+		 <div class="col-md-8">
+		 	<div class="panel panel-default">
+  			<div class="panel-heading"> <i class="fa fa-cog"></i> Worker 1 </div>
+		  	<div class="panel-body">
+		  	<div class="row">	
+		     	
+				<div class="col-md-5">
+						<canvas id="fitness" ></canvas>
+				</div>
+				<div class="col-md-3">
+						<p>Processed and raw data will
+		  be <a href='https://github.com/JJ/splash-volunteer/tree/data'>available
+		      from GitHub</a>.
+						
+				</div>
+				</div>
+		    </div>
+	  		</div>
 
-	  <p>This is an experiment in distributed evolutionary
-	  computation where you're contributing by just visiting this
-	    page <em>and keeping it in focus</em>. You can read about it
-	  in <a href='http://arxiv.org/abs/1503.06424'>this
-	      paper</a>. Your browser will be evaluating a population
-	  of <em>chromosomes</em>, <em>mutating</em> and mixing them
-	  to create a new population in
-	  an <a href='https://en.wikipedia.org/wiki/Evolutionary_algorithm'>evolutionary
-	      algorithm</a> that sends every <code>n</code>
-	  generations the best chromosome to the server, receiving a
-	  random one. The row above represents the best chromosome so
-	  far in shades of gray. The best one will be all black; the
-	  algorithm will stop when it finds it.</p>  
+
+		 </div>
+	</div>	 	
+                
+   <div class="row">
+		 <div class="col-md-8">
+		 	<div class="panel panel-default">
+  			<div class="panel-heading"> <h4> <i class="fa fa-file-text-o"></i> About This </h4> </div>
+		  	<div class="panel-body">
+			    <p>This is an experiment in distributed evolutionary
+				  computation where you're contributing by just visiting this
+				    page <em>and keeping it in focus</em>. You can read about it
+				  in <a href='http://arxiv.org/abs/1503.06424'>this
+				      paper</a>. Your browser will be evaluating a population
+				  of <em>chromosomes</em>, <em>mutating</em> and mixing them
+				  to create a new population in
+				  an <a href='https://en.wikipedia.org/wiki/Evolutionary_algorithm'>evolutionary
+				      algorithm</a> that sends every <code>n</code>
+				  generations the best chromosome to the server, receiving a
+				  random one. The row above represents the best chromosome so
+				  far in shades of gray. The best one will be all black; the
+				  algorithm will stop when it finds it.</p>  
+		  	</div>
+	  </div>
+		 </div>
+  		<div class="col-md-4">
+
+		  <div class="panel panel-default">
+	  			<div class="panel-heading"> <h4><i class="fa fa-cog"> </i> Get the data</h4> </div>
+			  	<div class="panel-body">
+				    <p>Processed and raw data will
+		  be <a href='https://github.com/JJ/splash-volunteer/tree/data'>available
+		      from GitHub</a>. Please
+		  use <a href='https://github.com/JJ/splash-volunteer/issues'>the
+		  issues section for suggestions and questions, as well as
+		      feature requests.</a></p> 
+			  	</div>
+		  </div>
+	  	</div>
 	</div>
-	
-	<div class='unit-30'>
-	  <h2><i class="fa fa-cog"> </i>Get the data</h2>
 
-	  <p>Processed and raw data will
-	  be <a href='https://github.com/JJ/splash-volunteer/tree/data'>available
-	      from GitHub</a>. Please
-	  use <a href='https://github.com/JJ/splash-volunteer/issues'>the
-	  issues section for suggestions and questions, as well as
-	      feature requests.</a></p> 
-	</div>
-	
+
+	  
+</div>
+
+<footer class="footer">
+      <div class="container">
+
+      	  <p  id="footer" class='text-centered text-muted'>Grab the code and data in <a href='https://github.com/JJ/splash-volunteer'>GitHub</a>. This is free software under the <a href='http://www.gnu.org/licenses/'>Affero GPL license</a>.</p>
+        
       </div>
-    </div>
-
-    <footer id="footer">
-      <p class='text-centered'>Grab the code and data in <a href='https://github.com/JJ/splash-volunteer'>GitHub</a>. This is free software under the <a href='http://www.gnu.org/licenses/'>Affero GPL license</a>.</p>
     </footer>
- <!--
-    <script type="text/javascript" src='js/trapWorker.js'></script>
-   -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
    <script>
 
 function tabify ( x, l, a, b, z ) {
@@ -108,13 +151,13 @@ function tabify ( x, l, a, b, z ) {
 
 // get line chart canvas
     var fitness = document.getElementById('fitness').getContext('2d');
-    fitness.canvas.width=document.getElementById('canvas').clientWidth*0.9;
-    fitness.canvas.height=document.getElementById('canvas').clientHeight*0.8;
+   // fitness.canvas.width=document.getElementById('canvas').clientWidth*0.9;
+   // fitness.canvas.height=document.getElementById('canvas').clientHeight*0.8;
 
     // get #IPs chart canvas
-    var IPs = document.getElementById('IPs').getContext('2d');
-    IPs.canvas.width=document.getElementById('ips_canvas').clientWidth*0.9;
-    IPs.canvas.height=document.getElementById('ips_canvas').clientHeight*0.7;
+   // var IPs = document.getElementById('IPs').getContext('2d');
+   // IPs.canvas.width=document.getElementById('ips_canvas').clientWidth*0.9;
+  //  IPs.canvas.height=document.getElementById('ips_canvas').clientHeight*0.7;
 
     // Chart data
     fitness_data = {
@@ -130,7 +173,7 @@ function tabify ( x, l, a, b, z ) {
         ]
     }
 
-    this_chart = new Chart(fitness).Line( fitness_data, {  responsive: true, maintainAspectRatio: true });
+    this_chart = new Chart(fitness).Line( fitness_data, {  responsive: true, maintainAspectRatio: true ,  animation: false });
 
 
     
@@ -138,7 +181,7 @@ function tabify ( x, l, a, b, z ) {
     
 
     // Data for IPs.
-    var ips_chart = new Chart(IPs,  { 
+   /* var ips_chart = new Chart(IPs,  { 
   responsive: true,
   maintainAspectRatio: true
     });
@@ -154,7 +197,7 @@ function tabify ( x, l, a, b, z ) {
             }
         ]
     };
-
+*/
 
   var config = {  
       population_size : 128,
@@ -195,27 +238,19 @@ var worker = new Worker('js/trapWorker.js');
     ips_data.datasets[0].data.push( e.data.ips );
 
     ips_chart.Line(ips_data);
-
-    
-    
     $("#best").html( tabify( e.data.best, config.trap_len,1, config.trap_b, config.trap_len -1 ));
-
-
-
   }, false);
 
   worker.postMessage({'cmd': 'start', 'config': config});
   worker.postMessage({'cmd': 'evolve'});
 
-	
-
 	});
-
-
-  
 
   </script>
 
 
-    </body>
-    </html>
+
+  
+
+  </body>
+</html>
