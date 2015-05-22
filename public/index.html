@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="js/kube.min.js"></script>
      
-    <!-- for Chart -->
+    <!-- for Chart http://devcrapshoot.com/javascript/nodejs-expressjs-and-mustachejs-template-engine -->
     <script type="text/javascript" src='js/Chart.min.js'></script>
 
     </head>
@@ -117,11 +117,7 @@ function tabify ( x, l, a, b, z ) {
     IPs.canvas.height=document.getElementById('ips_canvas').clientHeight*0.7;
 
     // Chart data
-    var this_chart = new Chart(fitness,  { 
-  responsive: true,
-  maintainAspectRatio: true
-    });
-    var fitness_data = {
+    fitness_data = {
         labels : [],
         datasets : [
             {
@@ -132,7 +128,14 @@ function tabify ( x, l, a, b, z ) {
                 data : []
             }
         ]
-    };
+    }
+
+    this_chart = new Chart(fitness).Line( fitness_data, {  responsive: true, maintainAspectRatio: true });
+
+
+    
+    
+    
 
     // Data for IPs.
     var ips_chart = new Chart(IPs,  { 
@@ -153,6 +156,13 @@ function tabify ( x, l, a, b, z ) {
     };
 
 
+  var config = {  
+      population_size : 128,
+        period :  100,
+        traps : 40,
+      trap_len : 4,
+        trap_b :  2
+  }
 
    $( document ).ready(function() {
   // Handler for .ready() called.
@@ -163,30 +173,37 @@ var worker = new Worker('js/trapWorker.js');
   	document.getElementById('footer').textContent =  e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
 
     // chart fitness
-    fitness_data.labels.push(e.data.generation_count);
-    fitness_data.datasets[0].data.push(e.data.fitness);
-    this_chart.Line(fitness_data);
+    if (e.data.generation_count !== undefined){
+
+
+        if (fitness_data.labels.length > 10)
+        {
+          //fitness_data.labels = fitness_data.labels.slice(1);
+          //fitness_data.datasets[0].data = fitness_data.datasets[0].data.slice(1);
+          this_chart.removeData( );
+        }
+    
+        //fitness_data.labels.push(e.data.generation_count);
+        //fitness_data.datasets[0].data.push(e.data.fitness);
+        this_chart.addData([e.data.fitness],e.data.generation_count);
+        this_chart.update();
+    }
+
     
      // Tracks the number of IPs
     ips_data.labels.push(e.data.generation_count);
     ips_data.datasets[0].data.push( e.data.ips );
+
     ips_chart.Line(ips_data);
 
     
     
-    $("#best").html( tabify( e.data.best, trap_len,1, trap_b, trap_len -1 ));
+    $("#best").html( tabify( e.data.best, config.trap_len,1, config.trap_b, config.trap_len -1 ));
 
 
 
   }, false);
 
-  	var config = {	
-    	population_size : 128,
-        period :  100,
-        traps : 40,
-    	trap_len : 4,
-        trap_b :  2
-	}
   worker.postMessage({'cmd': 'start', 'config': config});
   worker.postMessage({'cmd': 'evolve'});
 
