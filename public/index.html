@@ -30,6 +30,14 @@ body {
   padding-bottom: 20px;
 }
 
+.worker_line
+{
+height: 100px;
+padding-right: 10px;
+
+}
+
+
 </style>
 
   </head>
@@ -55,14 +63,17 @@ body {
 		  	<div class="panel-body">
 		  	<div class="row">	
 		     	
-				<div class="col-md-5">
-						<canvas id="fitness" ></canvas>
+				<div class="col-md-8">
+						<canvas id="fitness" class="worker_line" ></canvas>
 				</div>
-				<div class="col-md-3">
-						<p>Processed and raw data will
-		  be <a href='https://github.com/JJ/splash-volunteer/tree/data'>available
-		      from GitHub</a>.
-						
+				<div class="col-md-4">
+						<div class="panel panel-default">
+  			<div class="panel-heading"> <h4> <i class="fa fa-file-text-o"></i> About This </h4> </div>
+		  	<div class="panel-body">
+			    <p>This is an experiment in distributed evolutionary
+				 </p>  
+		  	</div>
+
 				</div>
 				</div>
 		    </div>
@@ -173,7 +184,7 @@ function tabify ( x, l, a, b, z ) {
         ]
     }
 
-    this_chart = new Chart(fitness).Line( fitness_data, {  responsive: true, maintainAspectRatio: true ,  animation: false });
+    this_chart = new Chart(fitness).Line( fitness_data, {  responsive: true, maintainAspectRatio: true ,  animation: false ,  maintainAspectRatio: false});
 
 
     
