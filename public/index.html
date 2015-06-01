@@ -55,16 +55,17 @@ padding-right: 10px;
         <h3 class="text-muted">An experiment in distributed evolutionary computation</h3>
       </div>
 
-                    <h1 class="page-header">How are we doing?</h1>
+  <h1 class="page-header">How are we doing?</h1>
+   
    <div class="row">
-		 <div class="col-md-8">
+     <div class="col-md-8">
 		 	<div class="panel panel-default">
   			<div class="panel-heading"> <i class="fa fa-cog"></i> Worker 1 </div>
 		  	<div class="panel-body">
 		  	<div class="row">	
 		     	
 				<div class="col-md-8">
-						<canvas id="fitness" class="worker_line" ></canvas>
+						<canvas id="fitness_w1" class="worker_line" ></canvas>
 				</div>
 				<div class="col-md-4">
 						<div class="panel panel-default">
@@ -77,12 +78,44 @@ padding-right: 10px;
 				</div>
 				</div>
 		    </div>
-	  		</div>
+	  	</div>
 
 
 		 </div>
-	</div>	 	
-                
+	   </div>	 	
+  </div>         
+  
+  <div class="row">
+     <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading"> <i class="fa fa-cog"></i> Worker 2 </div>
+        <div class="panel-body">
+        <div class="row"> 
+          
+        <div class="col-md-8">
+            <canvas id="fitness_w2" class="worker_line" ></canvas>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+        <div class="panel-heading"> <h4> <i class="fa fa-file-text-o"></i> About This </h4> </div>
+        <div class="panel-body">
+          <p>This is an experiment in distributed evolutionary
+         </p>  
+        </div>
+
+        </div>
+        </div>
+        </div>
+      </div>
+
+
+     </div>
+     </div>   
+  </div>         
+  
+
+
+
    <div class="row">
 		 <div class="col-md-8">
 		 	<div class="panel panel-default">
@@ -122,7 +155,7 @@ padding-right: 10px;
 
 
 	  
-</div>
+
 
 <footer class="footer">
       <div class="container">
@@ -161,7 +194,10 @@ function tabify ( x, l, a, b, z ) {
 }
 
 // get line chart canvas
-    var fitness = document.getElementById('fitness').getContext('2d');
+    var fitness_w1 = document.getElementById('fitness_w1').getContext('2d');
+
+    var fitness_w2 = document.getElementById('fitness_w2').getContext('2d');
+
    // fitness.canvas.width=document.getElementById('canvas').clientWidth*0.9;
    // fitness.canvas.height=document.getElementById('canvas').clientHeight*0.8;
 
@@ -171,7 +207,7 @@ function tabify ( x, l, a, b, z ) {
   //  IPs.canvas.height=document.getElementById('ips_canvas').clientHeight*0.7;
 
     // Chart data
-    fitness_data = {
+    fitness_data_w1 = {
         labels : [],
         datasets : [
             {
@@ -184,10 +220,23 @@ function tabify ( x, l, a, b, z ) {
         ]
     }
 
-    this_chart = new Chart(fitness).Line( fitness_data, {  responsive: true, maintainAspectRatio: true ,  animation: false ,  maintainAspectRatio: false});
+    fitness_chart_w1 = new Chart(fitness_w1).Line( fitness_data_w1, {  responsive: true, maintainAspectRatio: true ,  animation: false ,  maintainAspectRatio: false});
 
 
-    
+      fitness_data_w2 = {
+        labels : [],
+        datasets : [
+            {
+                fillColor : "rgba(172,194,132,0.4)",
+                strokeColor : "#ACC26D",
+                pointColor : "#fff",
+                pointStrokeColor : "#9DB86D",
+                data : []
+            }
+        ]
+    }
+
+    fitness_chart_w2 = new Chart(fitness_w2).Line( fitness_data_w1, {  responsive: true, maintainAspectRatio: true ,  animation: false ,  maintainAspectRatio: false});  
     
     
 
@@ -220,9 +269,8 @@ function tabify ( x, l, a, b, z ) {
 
    $( document ).ready(function() {
   // Handler for .ready() called.
-var worker = new Worker('js/trapWorker.js');
-
-  worker.addEventListener('message', function(e) {
+var worker_1 = new Worker('js/trapWorker.js');
+    worker_1.addEventListener('message', function(e) {
 
   	document.getElementById('footer').textContent =  e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
 
@@ -230,17 +278,17 @@ var worker = new Worker('js/trapWorker.js');
     if (e.data.generation_count !== undefined){
 
 
-        if (fitness_data.labels.length > 10)
+        if (fitness_data_w1.labels.length > 10)
         {
           //fitness_data.labels = fitness_data.labels.slice(1);
           //fitness_data.datasets[0].data = fitness_data.datasets[0].data.slice(1);
-          this_chart.removeData( );
+          fitness_chart_w1.removeData( );
         }
     
         //fitness_data.labels.push(e.data.generation_count);
         //fitness_data.datasets[0].data.push(e.data.fitness);
-        this_chart.addData([e.data.fitness],e.data.generation_count);
-        this_chart.update();
+        fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
+        fitness_chart_w1.update();
     }
 
     
@@ -252,8 +300,44 @@ var worker = new Worker('js/trapWorker.js');
     $("#best").html( tabify( e.data.best, config.trap_len,1, config.trap_b, config.trap_len -1 ));
   }, false);
 
-  worker.postMessage({'cmd': 'start', 'config': config});
-  worker.postMessage({'cmd': 'evolve'});
+var worker_2 = new Worker('js/trapWorker.js');
+    worker_2.addEventListener('message', function(e) {
+
+    document.getElementById('footer').textContent =  e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
+
+    // chart fitness
+    if (e.data.generation_count !== undefined){
+
+
+        if (fitness_data_w2.labels.length > 10)
+        {
+          //fitness_data.labels = fitness_data.labels.slice(1);
+          //fitness_data.datasets[0].data = fitness_data.datasets[0].data.slice(1);
+          fitness_chart_w2.removeData( );
+        }
+    
+        //fitness_data.labels.push(e.data.generation_count);
+        //fitness_data.datasets[0].data.push(e.data.fitness);
+        fitness_chart_w2.addData([e.data.fitness],e.data.generation_count);
+        fitness_chart_w2.update();
+    }
+
+    
+     // Tracks the number of IPs
+    ips_data.labels.push(e.data.generation_count);
+    ips_data.datasets[0].data.push( e.data.ips );
+
+    ips_chart.Line(ips_data);
+    $("#best").html( tabify( e.data.best, config.trap_len,1, config.trap_b, config.trap_len -1 ));
+  }, false);
+
+
+  worker_1.postMessage({'cmd': 'start', 'config': config});
+  worker_1.postMessage({'cmd': 'evolve'});
+
+
+  worker_2.postMessage({'cmd': 'start', 'config': config});
+  worker_2.postMessage({'cmd': 'evolve'});
 
 	});
 
