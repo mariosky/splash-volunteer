@@ -32,7 +32,7 @@ body {
 
 .worker_line
 {
-height: 100px;
+height: 150px;
 padding-right: 10px;
 
 }
@@ -56,56 +56,74 @@ padding-right: 10px;
       </div>
 
   <h1 class="page-header">How are we doing?</h1>
-   
+   <!---->
+   <!-- WORKER 1-->
+   <!---->
    <div class="row">
-     <div class="col-md-8">
+     <div class="col-md-12">
 		 	<div class="panel panel-default">
   			<div class="panel-heading"> <i class="fa fa-cog"></i> Worker 1 </div>
 		  	<div class="panel-body">
-		  	<div class="row">	
-		     	
-				<div class="col-md-8">
-						<canvas id="fitness_w1" class="worker_line" ></canvas>
-				</div>
-				<div class="col-md-4">
-						<div class="panel panel-default">
-  			<div class="panel-heading"> <h4 id="population-w1"> About This </h4> </div>
-		  	<div class="panel-body">
-			    <p>This is an experiment in distributed evolutionary
-				 </p>  
-		  	</div>
+      		<div class="row">	
+      		    <div class="col-md-4">
+                 <h4>Parameters</h4>
+                <ul class="list-group">
+                    <li class="list-group-item"> Population  <span class="badge">254</span> </li>
+                    <li class="list-group-item"> Generation  <span class="badge">142566</span> </li>
+                
+                </ul>
+              </div>
 
-				</div>
-				</div>
-		    </div>
-	  	</div>
+      				<div class="col-md-4">
+                <h4>Fitness</h4>
+      						<canvas id="fitness_w1" class="worker_line" ></canvas>
+      				</div>
+      				
+
+              <div class="col-md-4">
+                   <h4>Best Chromosome</h4>
+                  <canvas id="chromosome_w1" class="worker_line" ></canvas>
+              </div>
+
+
+      		</div>
+      	</div>
 
 
 		 </div>
 	   </div>	 	
   </div>         
-  
-  <div class="row">
-     <div class="col-md-8">
+   <!---->
+   <!-- WORKER 2-->
+   <!---->
+   <div class="row">
+     <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading"> <i class="fa fa-cog"></i> Worker 2 </div>
         <div class="panel-body">
-        <div class="row"> 
-          
-        <div class="col-md-8">
-            <canvas id="fitness_w2" class="worker_line" ></canvas>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-        <div class="panel-heading"> <h4 id="population-w1"> About This </h4> </div>
-        <div class="panel-body">
-          <p>This is an experiment in distributed evolutionary
-         </p>  
-        </div>
+            <div class="row"> 
+              <div class="col-md-4">
+                 <h4>Parameters</h4>
+                <ul class="list-group">
+                    <li class="list-group-item"> Population  <span class="badge">254</span> </li>
+                    <li class="list-group-item"> Generation  <span class="badge">142566</span> </li>
+                
+                </ul>
+              </div>
 
-        </div>
-        </div>
-        </div>
+              <div class="col-md-4">
+                <h4>Fitness</h4>
+                  <canvas id="fitness_w2" class="worker_line" ></canvas>
+              </div>
+              
+
+              <div class="col-md-4">
+                   <h4>Best Chromosome</h4>
+                  <canvas id="chromosome_w2" class="worker_line" ></canvas>
+              </div>
+
+
+          </div>
       </div>
 
 
@@ -157,10 +175,12 @@ padding-right: 10px;
 	  
 
 
-<footer class="footer">
+    <footer class="footer">
       <div class="container">
 
-      	  <p  id="footer" class='text-centered text-muted'>Grab the code and data in <a href='https://github.com/JJ/splash-volunteer'>GitHub</a>. This is free software under the <a href='http://www.gnu.org/licenses/'>Affero GPL license</a>.</p>
+      	  <p  id="footer1" class='text-centered text-muted'>Grab the code and data in <a href='https://github.com/JJ/splash-volunteer'>GitHub</a>. This is free software under the <a href='http://www.gnu.org/licenses/'>Affero GPL license</a>.</p>
+
+          <p  id="footer2" class='text-centered text-muted'>Grab the code and data in <a href='https://github.com/JJ/splash-volunteer'>GitHub</a>. This is free software under the <a href='http://www.gnu.org/licenses/'>Affero GPL license</a>.</p>
         
       </div>
     </footer>
@@ -170,34 +190,22 @@ padding-right: 10px;
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
    <script>
 
-function tabify ( x, l, a, b, z ) {
-    var tab = "<table style='border:1px solid black;padding:0;margin:0;width:100%'><tr>";
-    for ( var i = 0; i < x.length; i+=4 ) {
-  tab += "<td style='background-color:";
-  var this_substr = x.substr(  i, l );
-  var num_ones = 0;
-  for ( var j = 0;  j < this_substr.length; j++ ) {
-    num_ones += (this_substr.substring(j,j+1) === "1"); 
+
+  var config = {  
+      population_size : 128,
+        period :  100,
+        traps : 40,
+      trap_len : 4,
+        trap_b :  2
   }
-  var this_result;
-  if ( num_ones <= z ) {
-    this_result = a*(z-num_ones)/z;
-  } else {
-    this_result = b*(num_ones -z)/(l-z);
-  }
-  
-  var colors=['white','lightgray','darkgray','darkslategray','black'];
-  tab += colors[this_result*2]+"'> </td>";
-    }
-    tab += "</tr></table>";
-    return tab;
-}
 
 // get line chart canvas
     var fitness_w1 = document.getElementById('fitness_w1').getContext('2d');
+    var chromosome_w1 = document.getElementById('chromosome_w1').getContext('2d');
+
 
     var fitness_w2 = document.getElementById('fitness_w2').getContext('2d');
-
+    var chromosome_w2 = document.getElementById('chromosome_w2').getContext('2d');
    // fitness.canvas.width=document.getElementById('canvas').clientWidth*0.9;
    // fitness.canvas.height=document.getElementById('canvas').clientHeight*0.8;
 
@@ -220,9 +228,30 @@ function tabify ( x, l, a, b, z ) {
         ]
     }
 
-    fitness_chart_w1 = new Chart(fitness_w1).Line( fitness_data_w1, {  responsive: true, maintainAspectRatio: true ,  animation: false ,  maintainAspectRatio: false});
+    fitness_chart_w1 = new Chart(fitness_w1).Line( fitness_data_w1, {  responsive: false,  animation: false ,  maintainAspectRatio: true});
 
+    chromosome_data_w1 ={
+        labels : Array.apply(null, new Array(160)).map(String.prototype.valueOf,""),
+        datasets : [
+            {
+            fillColor:  "rgba(0,0,0,0.8)",
+            strokeColor: "rgba(0,0,0,0.8)",
+            data : Array.apply(null, new Array(160)).map(Number.prototype.valueOf,0),
+            }
+        ]
+    }
 
+    chromosome_chart_w1 = new Chart(chromosome_w1).Bar(chromosome_data_w1, 
+
+                    {
+                        scaleBeginAtZero : true,scaleShowGridLines : false,scaleShowHorizontalLines: false,
+                        scaleShowVerticalLines: true, barShowStroke : false, barStrokeWidth : 0, barValueSpacing : 0,
+                        barDatasetSpacing : 0,responsive: false, maintainAspectRatio: false ,  animation: false ,  
+                        maintainAspectRatio: true 
+
+                    });
+
+      
       fitness_data_w2 = {
         labels : [],
         datasets : [
@@ -236,9 +265,40 @@ function tabify ( x, l, a, b, z ) {
         ]
     }
 
-    fitness_chart_w2 = new Chart(fitness_w2).Line( fitness_data_w2, {  responsive: true, maintainAspectRatio: true ,  animation: false ,  maintainAspectRatio: false});  
+    fitness_chart_w2 = new Chart(fitness_w2).Line( fitness_data_w2, 
+                {
+                        scaleBeginAtZero : true,scaleShowGridLines : false,scaleShowHorizontalLines: false,
+                        scaleShowVerticalLines: true, barShowStroke : false, barStrokeWidth : 0, barValueSpacing : 0,
+                        barDatasetSpacing : 0,responsive: false, maintainAspectRatio: false ,  animation: false ,  
+                        maintainAspectRatio: true 
+
+                    });
     
-    
+    chromosome_data_w2 ={
+        labels : Array.apply(null, new Array(160)).map(String.prototype.valueOf,""),
+        datasets : [
+            {
+            fillColor:  "rgba(0,0,0,0.8)",
+            strokeColor: "rgba(0,0,0,0.8)",
+            //highlightFill: "rgba(220,220,220,0.75)",
+            //highlightStroke: "rgba(220,220,220,1)",
+            data : Array.apply(null, new Array(160)).map(Number.prototype.valueOf,0),
+            }
+        ]
+    }
+
+    chromosome_data_w2.labels 
+
+    chromosome_chart_w2 = new Chart(chromosome_w2).Bar(chromosome_data_w2, 
+
+                    {
+                        scaleBeginAtZero : true,scaleShowGridLines : false,scaleShowHorizontalLines: false,
+                        scaleShowVerticalLines: true, barShowStroke : false, barStrokeWidth : 0, barValueSpacing : 0,
+                        barDatasetSpacing : 0,responsive: false, maintainAspectRatio: false ,  animation: false ,  
+                        maintainAspectRatio: true 
+
+                    });
+
 
     // Data for IPs.
    /* var ips_chart = new Chart(IPs,  { 
@@ -259,20 +319,15 @@ function tabify ( x, l, a, b, z ) {
     };
 */
 
-  var config = {  
-      population_size : 128,
-        period :  100,
-        traps : 40,
-      trap_len : 4,
-        trap_b :  2
-  }
+
 
    $( document ).ready(function() {
   // Handler for .ready() called.
 var worker_1 = new Worker('js/trapWorker.js');
+
     worker_1.addEventListener('message', function(e) {
 
-  	document.getElementById('footer').textContent =  e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
+  	document.getElementById('footer1').textContent = "Worker 1: "+fitness_data_w1.labels.length+"--"+e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
 
     // chart fitness
     if (e.data.generation_count !== undefined){
@@ -293,17 +348,30 @@ var worker_1 = new Worker('js/trapWorker.js');
 
     
      // Tracks the number of IPs
-    ips_data.labels.push(e.data.generation_count);
-    ips_data.datasets[0].data.push( e.data.ips );
+    //ips_data.labels.push(e.data.generation_count);
+    //ips_data.datasets[0].data.push( e.data.ips );
 
-    ips_chart.Line(ips_data);
-    $("#best").html( tabify( e.data.best, config.trap_len,1, config.trap_b, config.trap_len -1 ));
+    //ips_chart.Line(ips_data);
+
+
+    //$("#best").html( tabify( e.data.best, config.trap_len,1, config.trap_b, config.trap_len -1 ));
+
+    if (e.data.best !== undefined){
+      for (var i=0; i<e.data.best.length; i++)
+      {
+        chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
+        
+      }
+      chromosome_chart_w1.update();
+    }
+
+
   }, false);
 
 var worker_2 = new Worker('js/trapWorker.js');
     worker_2.addEventListener('message', function(e) {
 
-    document.getElementById('footer').textContent =  e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
+    document.getElementById('footer2').textContent =  "Worker 2: "+fitness_data_w2.labels.length+"--"+e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
 
     // chart fitness
     if (e.data.generation_count !== undefined){
@@ -324,11 +392,16 @@ var worker_2 = new Worker('js/trapWorker.js');
 
     
      // Tracks the number of IPs
-    ips_data.labels.push(e.data.generation_count);
-    ips_data.datasets[0].data.push( e.data.ips );
 
-    ips_chart.Line(ips_data);
-    $("#best").html( tabify( e.data.best, config.trap_len,1, config.trap_b, config.trap_len -1 ));
+    if (e.data.best !== undefined){
+      for (var i=0; i<e.data.best.length; i++)
+      {
+        chromosome_chart_w2.datasets[0].bars[i].value =e.data.best[i];
+        
+      }
+      chromosome_chart_w2.update();
+    }
+
   }, false);
 
 
