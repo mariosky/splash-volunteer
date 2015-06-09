@@ -5,11 +5,11 @@ self.addEventListener('message', function(e) {
   switch (data.cmd) {
 
     case 'start':
-        postMessage(data.cmd);
         start(data.config);
-        postMessage('WORKER STARTED');
+        postMessage({status:'created'});
         break;
     case 'evolve':
+        postMessage({status:'starting'});
         do_ea();
         break;
         };
@@ -58,8 +58,23 @@ function do_ea() {
                     eo.incorporate( data.chromosome );
                    }
                 }
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 404)
+                {
+                    //There is no population
+                    postMessage( 
+                    { 
+                    status:'no_work',     
+                    generation_count:eo.generation_count, 
+                    best:eo.population[0].string, 
+                    fitness:eo.population[0].fitness,'period':period
+                    });
+                    //No more work
+                    return;      
+
+                }
 
             }
+
         xmlhttp.send();
           
         var xmlhttp2 = new XMLHttpRequest();
@@ -78,7 +93,7 @@ function do_ea() {
 
 
                 postMessage( 
-                {   finished:'not_yet', 
+                {   status:'working', 
                     generation_count:eo.generation_count, 
                     best:eo.population[0].string, 
                     fitness:eo.population[0].fitness,'period':period,'ips':ips
@@ -107,13 +122,13 @@ function do_ea() {
 
         postMessage( 
                     { 
-                    finished:'yes',     
+                    finished:'finished',     
                     generation_count:eo.generation_count, 
                     best:eo.population[0].string, 
                     fitness:eo.population[0].fitness,'period':period
                     });
 
-
+        return;
                 
 
     }

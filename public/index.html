@@ -64,11 +64,11 @@ padding-right: 10px;
    <div class="row">
      <div class="col-md-12">
 		 	<div class="panel panel-default">
-  			<div class="panel-heading"> <i class="fa fa-cog"></i> Worker 1 </div>
+  			<div class="panel-heading"> <i class="fa fa-cog"></i> Worker 1  <span id='w1_status' class="label label-primary"> status </span> </div>
 		  	<div class="panel-body">
       		<div class="row">	
       		    <div class="col-md-4">
-                 <h4>Worker 1 information</h4>
+                 <h4>Worker 1 information</h4> 
                 <ul class="list-group">
                     <li class="list-group-item"> Population size <span  id="w1_pop" class="badge">254</span> </li>
                     <li class="list-group-item"> Current generation  <span id="w1_gen" class="badge">142566</span> </li>
@@ -102,7 +102,7 @@ padding-right: 10px;
    <div class="row">
      <div class="col-md-12">
       <div class="panel panel-default">
-        <div class="panel-heading"> <i class="fa fa-cog"></i> Worker 2 </div>
+        <div class="panel-heading"> <i class="fa fa-cog"></i> Worker 2 <span id='w2_status' class="label label-primary"> status </span></div>
         <div class="panel-body">
             <div class="row"> 
               <div class="col-md-4">
@@ -165,9 +165,9 @@ padding-right: 10px;
 	  			<div class="panel-heading"> <h4><i class="fa fa-cog"> </i> Get the data</h4> </div>
 			  	<div class="panel-body">
 				    <p>Processed and raw data will
-		  be <a href='https://github.com/JJ/splash-volunteer/tree/data'>available
+		  be <a href='https://github.com/mariosky/splash-volunteer/tree/data'>available
 		      from GitHub</a>. Please
-		  use <a href='https://github.com/JJ/splash-volunteer/issues'>the
+		  use <a href='https://github.com/mariosky/splash-volunteer/issues'>the
 		  issues section for suggestions and questions, as well as
 		      feature requests.</a></p> 
 			  	</div>
@@ -184,8 +184,7 @@ padding-right: 10px;
 
       	  <p  id="footer1" class='text-centered text-muted'>Grab the code and data in <a href='https://github.com/JJ/splash-volunteer'>GitHub</a>. This is free software under the <a href='http://www.gnu.org/licenses/'>Affero GPL license</a>.</p>
 
-          <p  id="footer2" class='text-centered text-muted'>Grab the code and data in <a href='https://github.com/JJ/splash-volunteer'>GitHub</a>. This is free software under the <a href='http://www.gnu.org/licenses/'>Affero GPL license</a>.</p>
-        
+            
       </div>
     </footer>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -207,20 +206,14 @@ padding-right: 10px;
         trap_b :  2
   }
 
-// get line chart canvas
+
     var fitness_w1 = document.getElementById('fitness_w1').getContext('2d');
     var chromosome_w1 = document.getElementById('chromosome_w1').getContext('2d');
 
 
     var fitness_w2 = document.getElementById('fitness_w2').getContext('2d');
     var chromosome_w2 = document.getElementById('chromosome_w2').getContext('2d');
-   // fitness.canvas.width=document.getElementById('canvas').clientWidth*0.9;
-   // fitness.canvas.height=document.getElementById('canvas').clientHeight*0.8;
 
-    // get #IPs chart canvas
-   // var IPs = document.getElementById('IPs').getContext('2d');
-   // IPs.canvas.width=document.getElementById('ips_canvas').clientWidth*0.9;
-  //  IPs.canvas.height=document.getElementById('ips_canvas').clientHeight*0.7;
 
     // Chart data
     fitness_data_w1 = {
@@ -312,84 +305,106 @@ padding-right: 10px;
 
    $( document ).ready(function() {
   // Handler for .ready() called.
-var worker_1 = new Worker('js/trapWorker.js');
+    var worker_1 = new Worker('js/trapWorker.js');
 
     worker_1.addEventListener('message', function(e) {
 
-  	document.getElementById('footer1').textContent = "Worker 1: "+fitness_data_w1.labels.length+"--"+e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
-
-    // 
-    if (e.data.generation_count !== undefined){
-
-
-        if (fitness_data_w1.labels.length > 10)
-        {
-            fitness_chart_w1.removeData( );
-        }
-    
-        fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
-        fitness_chart_w1.update();
-    
-      for (var i=0; i<e.data.best.length; i++)
-      {
-        chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
-        
-      }
-      chromosome_chart_w1.update();
-    
-    document.getElementById('w1_gen').textContent=e.data.generation_count;
-    document.getElementById('w1_best').textContent=e.data.fitness;
-    
-    
-    if (e.data.finished !== undefined && e.data.status == 'yes')
+    if (e.data.status !== undefined)
     {
-      alert('finished');
+
+
+      switch(e.data.status) {
+        case 'created':
+          document.getElementById('w1_status').textContent='Created';
+          break;
+        case 'starting':
+          document.getElementById('w1_status').textContent='Starting';
+          break;
+        
+        case 'working':
+          document.getElementById('w1_status').textContent='Working';
+          if (fitness_data_w1.labels.length > 10)
+          {
+            fitness_chart_w1.removeData( );
+          }
+    
+          fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
+          fitness_chart_w1.update();
+    
+          for (var i=0; i<e.data.best.length; i++)
+          {
+          chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
+        
+          }
+          chromosome_chart_w1.update();
+          document.getElementById('w1_gen').textContent=e.data.generation_count;
+          document.getElementById('w1_best').textContent=e.data.fitness;
+          document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
+          break;
+
+        case 'finished':
+            document.getElementById('w1_status').textContent='Finished';
+            alert('finished');
+            break;
+        case 'no_work':
+            document.getElementById('w1_status').textContent='Halted';
+            break;
+        default:
+         }
+
+
     }
 
-    document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating'  ;
-  }
 
   }, false);
 
 var worker_2 = new Worker('js/trapWorker.js');
     worker_2.addEventListener('message', function(e) {
-
-    document.getElementById('footer2').textContent =  "Worker 2: "+fitness_data_w2.labels.length+"--"+e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
-
-    // chart fitness
-    if (e.data.generation_count !== undefined){
-
-
-        if (fitness_data_w2.labels.length > 10)
-        {
-            fitness_chart_w2.removeData( );
-        }
-    
-        fitness_chart_w2.addData([e.data.fitness],e.data.generation_count);
-        fitness_chart_w2.update();
-    
-
-    
-     // Tracks the number of IPs
-
-      for (var i=0; i<e.data.best.length; i++)
-      {
-        chromosome_chart_w2.datasets[0].bars[i].value =e.data.best[i];
-        
-      }
-      chromosome_chart_w2.update();
-
-    document.getElementById('w2_gen').textContent=e.data.generation_count;
-    document.getElementById('w2_best').textContent=e.data.fitness;
-    document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating'  ;
-    
-    if (e.data.finished !== undefined && e.data.status == 'yes')
+          if (e.data.status !== undefined)
     {
-      alert('finished');
-    }
 
 
-    document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating'  ;
+      switch(e.data.status) {
+        case 'created':
+          document.getElementById('w2_status').textContent='Created';
+          break;
+        case 'starting':
+          document.getElementById('w2_status').textContent='Starting';
+          break;
+        
+        case 'working':
+          document.getElementById('w2_status').textContent='Working';
+          if (fitness_data_w2.labels.length > 10)
+          {
+            fitness_chart_w2.removeData( );
+          }
+    
+          fitness_chart_w2.addData([e.data.fitness],e.data.generation_count);
+          fitness_chart_w2.update();
+    
+          for (var i=0; i<e.data.best.length; i++)
+          {
+          chromosome_chart_w2.datasets[0].bars[i].value =e.data.best[i];
+        
+          }
+          chromosome_chart_w2.update();
+          document.getElementById('w2_gen').textContent=e.data.generation_count;
+          document.getElementById('w2_best').textContent=e.data.fitness;
+          document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
+          break;
+
+        case 'finished':
+            document.getElementById('w2_status').textContent='Finished';
+            alert('finished');
+            break;
+        case 'no_work':
+            document.getElementById('w2_status').textContent='Halted';
+            break;
+        default:
+      }
+
+  
+
     }
   }, false);
 
