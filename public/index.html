@@ -318,48 +318,36 @@ var worker_1 = new Worker('js/trapWorker.js');
 
   	document.getElementById('footer1').textContent = "Worker 1: "+fitness_data_w1.labels.length+"--"+e.data.generation_count +"/Fitness:"+ e.data.fitness +"/Period:"+ e.data.period+"/IPS:"+ e.data.ips;
 
-    // chart fitness
+    // 
     if (e.data.generation_count !== undefined){
 
 
         if (fitness_data_w1.labels.length > 10)
         {
-          //fitness_data.labels = fitness_data.labels.slice(1);
-          //fitness_data.datasets[0].data = fitness_data.datasets[0].data.slice(1);
-          fitness_chart_w1.removeData( );
+            fitness_chart_w1.removeData( );
         }
     
-        //fitness_data.labels.push(e.data.generation_count);
-        //fitness_data.datasets[0].data.push(e.data.fitness);
         fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
         fitness_chart_w1.update();
-    }
-
     
-    //ips_data.datasets[0].data.push( e.data.ips );
-
-
-    if (e.data.best !== undefined){
       for (var i=0; i<e.data.best.length; i++)
       {
         chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
         
       }
       chromosome_chart_w1.update();
-    }
-    if (e.data.generation_count !== undefined)
-    {
+    
     document.getElementById('w1_gen').textContent=e.data.generation_count;
     document.getElementById('w1_best').textContent=e.data.fitness;
     
-    }
-
+    
     if (e.data.finished !== undefined && e.data.status == 'yes')
     {
       alert('finished');
     }
 
     document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating'  ;
+  }
 
   }, false);
 
@@ -374,44 +362,35 @@ var worker_2 = new Worker('js/trapWorker.js');
 
         if (fitness_data_w2.labels.length > 10)
         {
-          //fitness_data.labels = fitness_data.labels.slice(1);
-          //fitness_data.datasets[0].data = fitness_data.datasets[0].data.slice(1);
-          fitness_chart_w2.removeData( );
+            fitness_chart_w2.removeData( );
         }
     
-        //fitness_data.labels.push(e.data.generation_count);
-        //fitness_data.datasets[0].data.push(e.data.fitness);
         fitness_chart_w2.addData([e.data.fitness],e.data.generation_count);
         fitness_chart_w2.update();
-    }
+    
 
     
      // Tracks the number of IPs
 
-    if (e.data.best !== undefined){
       for (var i=0; i<e.data.best.length; i++)
       {
         chromosome_chart_w2.datasets[0].bars[i].value =e.data.best[i];
         
       }
       chromosome_chart_w2.update();
-    }
 
-  if (e.data.generation_count !== undefined)
-    {
     document.getElementById('w2_gen').textContent=e.data.generation_count;
     document.getElementById('w2_best').textContent=e.data.fitness;
     document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating'  ;
-    }
-
+    
     if (e.data.finished !== undefined && e.data.status == 'yes')
     {
       alert('finished');
     }
 
-     
-    document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating'  ;
 
+    document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating'  ;
+    }
   }, false);
 
   set_population(config);
