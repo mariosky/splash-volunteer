@@ -337,7 +337,7 @@ padding-right: 10px;
         
           }
           chromosome_chart_w1.update();
-          document.getElementById('w1_gen').textContent=e.data.generation_count;
+          document.getElementById('w1_gen').textContent=e.data.generation_count.toString() + ":" + e.data.pop_size.toString();
           document.getElementById('w1_best').textContent=e.data.fitness;
           document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
           break;
@@ -388,7 +388,7 @@ var worker_2 = new Worker('js/trapWorker.js');
         
           }
           chromosome_chart_w2.update();
-          document.getElementById('w2_gen').textContent=e.data.generation_count;
+          document.getElementById('w2_gen').textContent=e.data.generation_count+ ":" + e.data.pop_size.toString();
           document.getElementById('w2_best').textContent=e.data.fitness;
           document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
           break;

@@ -52,28 +52,34 @@ function do_ea() {
         var url = "/random";
         xmlhttp.open("GET", url, true);
         xmlhttp.onreadystatechange = function() {
-           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var data = JSON.parse(xmlhttp.responseText);
-                if ( data.chromosome ) {
-                    eo.incorporate( data.chromosome );
-                   }
-                }
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 404)
-                {
-                    //There is no population
-                    postMessage( 
-                    { 
-                    status:'no_work',     
-                    generation_count:eo.generation_count, 
-                    best:eo.population[0].string, 
-                    fitness:eo.population[0].fitness,'period':period
-                    });
-                    //No more work
-                    return;      
+           if (xmlhttp.readyState == 4 ) {
 
+                if (xmlhttp.status == 200 /*|| xmlhttp.status == 304*/)
+                {
+                    var data = JSON.parse(xmlhttp.responseText);
+                    if ( data.chromosome ) {
+                        eo.incorporate( data.chromosome );
+                       }
+                
                 }
+                else if ( xmlhttp.status == 404)
+                    {
+                        //There is no population
+                        postMessage( 
+                        { 
+                        status:'no_work',     
+                        generation_count:eo.generation_count, 
+                        best:eo.population[0].string, 
+                        fitness:eo.population[0].fitness,'period':period,
+                        pop_size: eo.population.length
+                        });
+                        //No more work
+                        return;      
+
+                    }
 
             }
+        }
 
         xmlhttp.send();
           
@@ -96,7 +102,8 @@ function do_ea() {
                 {   status:'working', 
                     generation_count:eo.generation_count, 
                     best:eo.population[0].string, 
-                    fitness:eo.population[0].fitness,'period':period,'ips':ips
+                    fitness:eo.population[0].fitness,'period':period,'ips':ips,
+                    pop_size: eo.population.length
                     });
 
 
@@ -125,7 +132,9 @@ function do_ea() {
                     finished:'finished',     
                     generation_count:eo.generation_count, 
                     best:eo.population[0].string, 
-                    fitness:eo.population[0].fitness,'period':period
+                    fitness:eo.population[0].fitness,
+                    'period':period,
+                    pop_size: eo.population.length
                     });
 
         return;
