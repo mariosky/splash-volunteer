@@ -52,10 +52,12 @@ padding-right: 10px;
             <li role="presentation"><a href="#">Contact</a></li>
           </ul>
         </nav>
-        <h3 class="text-muted">An experiment in distributed evolutionary computation</h3>
+        <h3 class="text-muted">An experiment in distributed evolutionary computation 
+          <span id='ips' class="label label-info">0 User(s) Collaborating</span> 
+        </h3>
       </div>
 
-  <h1 class="page-header">How are we doing?</h1>
+  <h1 class="page-header">How are we doing? </h1>
    <!---->
    <!-- WORKER 1-->
    <!---->
@@ -66,10 +68,11 @@ padding-right: 10px;
 		  	<div class="panel-body">
       		<div class="row">	
       		    <div class="col-md-4">
-                 <h4>Parameters</h4>
+                 <h4>Worker 1 information</h4>
                 <ul class="list-group">
-                    <li class="list-group-item"> Population  <span class="badge">254</span> </li>
-                    <li class="list-group-item"> Generation  <span class="badge">142566</span> </li>
+                    <li class="list-group-item"> Population size <span  id="w1_pop" class="badge">254</span> </li>
+                    <li class="list-group-item"> Current generation  <span id="w1_gen" class="badge">142566</span> </li>
+                    <li class="list-group-item"> Best fitness   <span id="w1_best" class="badge">142566</span> </li>
                 
                 </ul>
               </div>
@@ -103,10 +106,11 @@ padding-right: 10px;
         <div class="panel-body">
             <div class="row"> 
               <div class="col-md-4">
-                 <h4>Parameters</h4>
+                 <h4>Worker 1 information</h4>
                 <ul class="list-group">
-                    <li class="list-group-item"> Population  <span class="badge">254</span> </li>
-                    <li class="list-group-item"> Generation  <span class="badge">142566</span> </li>
+                    <li class="list-group-item"> Population size <span id="w2_pop" class="badge">254</span> </li>
+                    <li class="list-group-item"> Current generation  <span id="w2_gen" class="badge">142566</span> </li>
+                    <li class="list-group-item"> Best fitness  <span id="w2_best" class="badge">142566</span> </li>
                 
                 </ul>
               </div>
@@ -192,6 +196,10 @@ padding-right: 10px;
 
 
   var config = {  
+      populatiom_min:128,
+      population_max:256,
+      random_population:true,
+
       population_size : 128,
         period :  100,
         traps : 40,
@@ -300,25 +308,6 @@ padding-right: 10px;
                     });
 
 
-    // Data for IPs.
-   /* var ips_chart = new Chart(IPs,  { 
-  responsive: true,
-  maintainAspectRatio: true
-    });
-    var ips_data = {
-        labels : [],
-        datasets : [
-            {
-                fillColor : "rgba(160,204,182,0.4)",
-                strokeColor : "#ACC26D",
-                pointColor : "#ddd",
-                pointStrokeColor : "#9DB86D",
-                data : []
-            }
-        ]
-    };
-*/
-
 
 
    $( document ).ready(function() {
@@ -347,14 +336,8 @@ var worker_1 = new Worker('js/trapWorker.js');
     }
 
     
-     // Tracks the number of IPs
-    //ips_data.labels.push(e.data.generation_count);
     //ips_data.datasets[0].data.push( e.data.ips );
 
-    //ips_chart.Line(ips_data);
-
-
-    //$("#best").html( tabify( e.data.best, config.trap_len,1, config.trap_b, config.trap_len -1 ));
 
     if (e.data.best !== undefined){
       for (var i=0; i<e.data.best.length; i++)
@@ -364,7 +347,19 @@ var worker_1 = new Worker('js/trapWorker.js');
       }
       chromosome_chart_w1.update();
     }
+    if (e.data.generation_count !== undefined)
+    {
+    document.getElementById('w1_gen').textContent=e.data.generation_count;
+    document.getElementById('w1_best').textContent=e.data.fitness;
+    
+    }
 
+    if (e.data.finished !== undefined && e.data.status == 'yes')
+    {
+      alert('finished');
+    }
+
+    document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating'  ;
 
   }, false);
 
@@ -402,17 +397,54 @@ var worker_2 = new Worker('js/trapWorker.js');
       chromosome_chart_w2.update();
     }
 
+  if (e.data.generation_count !== undefined)
+    {
+    document.getElementById('w2_gen').textContent=e.data.generation_count;
+    document.getElementById('w2_best').textContent=e.data.fitness;
+    document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating'  ;
+    }
+
+    if (e.data.finished !== undefined && e.data.status == 'yes')
+    {
+      alert('finished');
+    }
+
+     
+    document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating'  ;
+
   }, false);
 
+  set_population(config);
+  document.getElementById('w1_pop').textContent=config.population_size;
 
+  
   worker_1.postMessage({'cmd': 'start', 'config': config});
   worker_1.postMessage({'cmd': 'evolve'});
 
+  set_population(config);
+  document.getElementById('w2_pop').textContent=config.population_size;
 
   worker_2.postMessage({'cmd': 'start', 'config': config});
   worker_2.postMessage({'cmd': 'evolve'});
 
 	});
+
+  var set_population = function( config)
+      {
+        if (config.random_population)
+        {
+          pop_size=Math.floor((Math.random() * config.population_max) + config.populatiom_min); 
+          //population has to be an even number?
+          if (pop_size%2 == 1)
+          {
+              pop_size++;
+          }
+          config.population_size=pop_size;
+        }
+
+        return config;
+
+      } 
 
   </script>
 

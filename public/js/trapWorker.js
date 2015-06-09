@@ -78,7 +78,8 @@ function do_ea() {
 
 
                 postMessage( 
-                {   generation_count:eo.generation_count, 
+                {   finished:'not_yet', 
+                    generation_count:eo.generation_count, 
                     best:eo.population[0].string, 
                     fitness:eo.population[0].fitness,'period':period,'ips':ips
                     });
@@ -103,6 +104,17 @@ function do_ea() {
         var xmlhttp4 = new XMLHttpRequest();
         xmlhttp4.open("PUT", "/one/"+eo.population[0].string+"/"+eo.population[0].fitness, true);
         xmlhttp4.send();
+
+        postMessage( 
+                    { 
+                    finished:'yes',     
+                    generation_count:eo.generation_count, 
+                    best:eo.population[0].string, 
+                    fitness:eo.population[0].fitness,'period':period
+                    });
+
+
+                
 
     }
 }
