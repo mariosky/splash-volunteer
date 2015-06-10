@@ -192,6 +192,8 @@ padding-right: 10px;
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
    <script>
+  var worker_1;
+  var worker_2;
 
 
   var config = {  
@@ -304,8 +306,61 @@ padding-right: 10px;
 
 
    $( document ).ready(function() {
+
+    create_workers();
+	});
+
+  var set_population = function( config)
+      {
+        if (config.random_population)
+        {
+          pop_size=Math.floor( (Math.random() * (config.population_max-config.populatiom_min)) + config.populatiom_min); 
+          //population has to be an even number?
+          if (pop_size%2 == 1)
+          {
+              pop_size++;
+          }
+          config.population_size=pop_size;
+        }
+
+        return config;
+
+      } 
+
+  var terminate_workers = function()
+  {
+        if(typeof(Worker) !== "undefined") {
+          if(typeof(worker_1) != "undefined") {
+              worker_1.terminate();
+          }
+        }
+        if(typeof(Worker) !== "undefined") {
+          if(typeof(worker_2) != "undefined") {
+              worker_2.terminate();
+          }
+        }
+
+        document.getElementById('w1_status').textContent='Finished';
+        document.getElementById('w2_status').textContent='Finished';
+     
+  }
+
+  var create_workers = function()
+  {
+        if(typeof(Worker) !== "undefined") {
+          if(typeof(worker_1) == "undefined") {
+              worker_1 = new Worker('js/trapWorker.js');
+          }
+        }
+        if(typeof(Worker) !== "undefined") {
+          if(typeof(worker_2) == "undefined") {
+              worker_2 = new Worker('js/trapWorker.js');
+          }
+        }
+
+       
   // Handler for .ready() called.
-    var worker_1 = new Worker('js/trapWorker.js');
+    //worker_1 = new Worker('js/trapWorker.js');
 
     worker_1.addEventListener('message', function(e) {
 
@@ -343,11 +398,23 @@ padding-right: 10px;
           break;
 
         case 'finished':
-            document.getElementById('w1_status').textContent='Finished';
-            alert('finished');
+            for (var i=0; i<e.data.best.length; i++)
+              {
+              chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
+            
+              }
+              chromosome_chart_w1.update();
+              document.getElementById('w1_gen').textContent=e.data.generation_count.toString() + ":" + e.data.pop_size.toString();
+              document.getElementById('w1_best').textContent=e.data.fitness;
+              fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
+              fitness_chart_w1.update();
+              document.getElementById('w1_status').textContent='Finished';
+              terminate_workers();
+
             break;
         case 'no_work':
             document.getElementById('w1_status').textContent='Halted';
+            
             break;
         default:
          }
@@ -358,12 +425,12 @@ padding-right: 10px;
 
   }, false);
 
-var worker_2 = new Worker('js/trapWorker.js');
+    //worker_2 = new Worker('js/trapWorker.js');
     worker_2.addEventListener('message', function(e) {
           if (e.data.status !== undefined)
     {
 
-
+      console.log('w2:'+e.data.status); 
       switch(e.data.status) {
         case 'created':
           document.getElementById('w2_status').textContent='Created';
@@ -392,11 +459,21 @@ var worker_2 = new Worker('js/trapWorker.js');
           document.getElementById('w2_best').textContent=e.data.fitness;
           document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
           break;
+      case 'finished':
+            for (var i=0; i<e.data.best.length; i++)
+              {
+              chromosome_chart_w2.datasets[0].bars[i].value =e.data.best[i];
+            
+              }
+              chromosome_chart_w2.update();
+              document.getElementById('w2_gen').textContent=e.data.generation_count.toString() + ":" + e.data.pop_size.toString();
+              document.getElementById('w2_best').textContent=e.data.fitness;
+              fitness_chart_w2.addData([e.data.fitness],e.data.generation_count);
+              fitness_chart_w2.update();
 
-        case 'finished':
-            document.getElementById('w2_status').textContent='Finished';
-            alert('finished');
-            break;
+              document.getElementById('w2_status').textContent='Finished';
+              terminate_workers();
+              
         case 'no_work':
             document.getElementById('w2_status').textContent='Halted';
             break;
@@ -421,24 +498,8 @@ var worker_2 = new Worker('js/trapWorker.js');
   worker_2.postMessage({'cmd': 'start', 'config': config});
   worker_2.postMessage({'cmd': 'evolve'});
 
-	});
-
-  var set_population = function( config)
-      {
-        if (config.random_population)
-        {
-          pop_size=Math.floor((Math.random() * config.population_max) + config.populatiom_min); 
-          //population has to be an even number?
-          if (pop_size%2 == 1)
-          {
-              pop_size++;
-          }
-          config.population_size=pop_size;
-        }
-
-        return config;
-
-      } 
+     
+  }
 
   </script>
 

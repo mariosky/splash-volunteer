@@ -44,6 +44,10 @@ function start(config){
 
 function do_ea() {
     eo.generation();
+    //if ( eo.population[0].fitness == traps*trap_b ) {
+    //    console.log('finished before');
+    //}
+
     if ( (eo.generation_count % period === 0) ) {
         
     
@@ -52,6 +56,8 @@ function do_ea() {
         var url = "/random";
         xmlhttp.open("GET", url, true);
         xmlhttp.onreadystatechange = function() {
+
+
            if (xmlhttp.readyState == 4 ) {
 
                 if (xmlhttp.status == 200 /*|| xmlhttp.status == 304*/)
@@ -63,7 +69,7 @@ function do_ea() {
                 
                 }
                 else if ( xmlhttp.status == 404)
-                    {
+                    {   console.log("404");
                         //There is no population
                         postMessage( 
                         { 
@@ -73,13 +79,15 @@ function do_ea() {
                         fitness:eo.population[0].fitness,'period':period,
                         pop_size: eo.population.length
                         });
+                        console.log("AFTER 404");
                         //No more work
-                        return;      
+                        //return;      
 
                     }
 
             }
         }
+
 
         xmlhttp.send();
           
@@ -118,26 +126,29 @@ function do_ea() {
     }
 
     if ( eo.population[0].fitness < traps*trap_b ) {
+        console.log('iter');
         setTimeout(do_ea, 5);
-    }
+        }
+    
     else{
-
-        // And puts another one in the pool
-        var xmlhttp4 = new XMLHttpRequest();
-        xmlhttp4.open("PUT", "/one/"+eo.population[0].string+"/"+eo.population[0].fitness, true);
-        xmlhttp4.send();
-
-        postMessage( 
+                postMessage( 
                     { 
-                    finished:'finished',     
+                    status:'finished',     
                     generation_count:eo.generation_count, 
                     best:eo.population[0].string, 
                     fitness:eo.population[0].fitness,
                     'period':period,
                     pop_size: eo.population.length
                     });
+        // And puts another one in the pool
+        var xmlhttp4 = new XMLHttpRequest();
+        xmlhttp4.open("PUT", "/one/"+eo.population[0].string+"/"+eo.population[0].fitness, true);
+        xmlhttp4.send();
+        console.log('finished after')
 
-        return;
+        
+
+       
                 
 
     }
