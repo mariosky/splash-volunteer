@@ -48,8 +48,9 @@ padding-right: 10px;
         <nav>
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>
+
+            <li role="presentation"><a href="/">Restart</a></li>
+            <li role="presentation"><a href="https://github.com/mariosky/splash-volunteer">Fork</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">An experiment in distributed evolutionary computation 
@@ -57,7 +58,7 @@ padding-right: 10px;
         </h3>
       </div>
 
-  <h1 class="page-header">How are we doing? </h1>
+  <h1 class="page-header">How are we doing? </h1> 
    <!---->
    <!-- WORKER 1-->
    <!---->
@@ -182,7 +183,7 @@ padding-right: 10px;
     <footer class="footer">
       <div class="container">
 
-      	  <p  id="footer1" class='text-centered text-muted'>Grab the code and data in <a href='https://github.com/JJ/splash-volunteer'>GitHub</a>. This is free software under the <a href='http://www.gnu.org/licenses/'>Affero GPL license</a>.</p>
+      	  <p  id="footer1" class='text-centered text-muted'>Grab the code and data in <a href='https://github.com/mariosky/splash-volunteer'>GitHub</a>. This is free software under the <a href='http://www.gnu.org/licenses/'>Affero GPL license</a>.</p>
 
             
       </div>
@@ -413,7 +414,7 @@ padding-right: 10px;
 
             break;
         case 'no_work':
-            document.getElementById('w1_status').textContent='Halted';
+            document.getElementById('w1_status').textContent='Finished';
             
             break;
         default:
@@ -475,7 +476,7 @@ padding-right: 10px;
               terminate_workers();
               
         case 'no_work':
-            document.getElementById('w2_status').textContent='Halted';
+            document.getElementById('w2_status').textContent='Finished';
             break;
         default:
       }
