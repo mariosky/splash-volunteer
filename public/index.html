@@ -326,12 +326,12 @@ padding-right: 10px;
    $( document ).ready(function() {
 
      $("#start_w1").click(function () {
-            terminate_worker_1();
+           // terminate_worker_1();
             setup_worker_1();
           });
 
      $("#start_w2").click(function () {
-             terminate_worker_2();
+          //   terminate_worker_2();
             setup_worker_2();
           });
 
@@ -459,7 +459,7 @@ padding-right: 10px;
               fitness_chart_w2.update();
 
               document.getElementById('w2_status').textContent='Finished';
-              terminate_worker_2();
+              //terminate_worker_2();
               
         case 'no_work':
             document.getElementById('w2_status').textContent='Finished';
@@ -537,7 +537,7 @@ padding-right: 10px;
               fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
               fitness_chart_w1.update();
               document.getElementById('w1_status').textContent='Finished';
-              terminate_worker_1();
+              //terminate_worker_1();
 
             break;
         case 'no_work':
