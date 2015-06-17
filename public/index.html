@@ -60,9 +60,12 @@ padding-right: 10px;
 
   <h1 class="page-header">How are we doing? </h1> 
    <!---->
-   <!-- WORKER 1-->
+   <!-- WORKER 1--><button type="button" class="btn btn-default">Default</button>
    <!---->
    <div class="row">
+
+   <div class="row">
+
      <div class="col-md-12">
 		 	<div class="panel panel-default">
   			<div class="panel-heading"> <i class="fa fa-cog"></i> Worker 1  <span id='w1_status' class="label label-primary"> status </span> </div>
@@ -93,10 +96,15 @@ padding-right: 10px;
       		</div>
       	</div>
 
-
 		 </div>
-	   </div>	 	
-  </div>         
+	   </div>
+  	   </div>
+
+       <div class="row">
+           <button type="button" class="btn btn-default" id="start_w1">Default</button>
+       </div>
+
+   </div>
    <!---->
    <!-- WORKER 2-->
    <!---->
@@ -311,8 +319,19 @@ padding-right: 10px;
 
    $( document ).ready(function() {
 
+     $("#start_w1").click(function () {
+            setup_worker_1();
+          });
+
+     $("#start_w2").click(function () {
+            setup_worker_2();
+          });
+
     setup_worker_1();
     setup_worker_2();
+
+
+
 
 	});
 
@@ -415,7 +434,7 @@ padding-right: 10px;
         
           }
           chromosome_chart_w2.update();
-          document.getElementById('w2_gen').textContent=e.data.generation_count+ ":" + e.data.pop_size.toString();
+          document.getElementById('w2_gen').textContent=e.data.generation_count;
           document.getElementById('w2_best').textContent=e.data.fitness;
           document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
           break;
@@ -426,7 +445,7 @@ padding-right: 10px;
             
               }
               chromosome_chart_w2.update();
-              document.getElementById('w2_gen').textContent=e.data.generation_count.toString() + ":" + e.data.pop_size.toString();
+              document.getElementById('w2_gen').textContent=e.data.generation_count.toString();
               document.getElementById('w2_best').textContent=e.data.fitness;
               fitness_chart_w2.addData([e.data.fitness],e.data.generation_count);
               fitness_chart_w2.update();
@@ -493,7 +512,7 @@ padding-right: 10px;
 
           }
           chromosome_chart_w1.update();
-          document.getElementById('w1_gen').textContent=e.data.generation_count.toString() + ":" + e.data.pop_size.toString();
+          document.getElementById('w1_gen').textContent=e.data.generation_count.toString();
           document.getElementById('w1_best').textContent=e.data.fitness;
           document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
           break;
@@ -505,7 +524,7 @@ padding-right: 10px;
 
               }
               chromosome_chart_w1.update();
-              document.getElementById('w1_gen').textContent=e.data.generation_count.toString() + ":" + e.data.pop_size.toString();
+              document.getElementById('w1_gen').textContent=e.data.generation_count.toString();
               document.getElementById('w1_best').textContent=e.data.fitness;
               fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
               fitness_chart_w1.update();
