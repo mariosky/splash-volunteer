@@ -188,6 +188,9 @@ padding-right: 10px;
             
       </div>
     </footer>
+
+  </div>
+
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -308,7 +311,9 @@ padding-right: 10px;
 
    $( document ).ready(function() {
 
-    create_workers();
+    setup_worker_1();
+    setup_worker_2();
+
 	});
 
   var set_population = function( config)
@@ -346,87 +351,41 @@ padding-right: 10px;
      
   }
 
-  var create_workers = function()
+
+  var terminate_worker_1  = function()
   {
         if(typeof(Worker) !== "undefined") {
-          if(typeof(worker_1) == "undefined") {
-              worker_1 = new Worker('js/trapWorker.js');
+          if(typeof(worker_1) != "undefined") {
+              worker_1.terminate();
           }
         }
+        document.getElementById('w1_status').textContent='Finished';
+
+  }
+
+    var terminate_worker_2  = function()
+      {
+
+        if(typeof(Worker) !== "undefined") {
+          if(typeof(worker_2) != "undefined") {
+              worker_2.terminate();
+          }
+        }
+        document.getElementById('w2_status').textContent='Finished';
+
+    }
+
+
+  var setup_worker_2 = function()
+  {
+
         if(typeof(Worker) !== "undefined") {
           if(typeof(worker_2) == "undefined") {
               worker_2 = new Worker('js/trapWorker.js');
           }
         }
 
-       
-  // Handler for .ready() called.
-    //worker_1 = new Worker('js/trapWorker.js');
 
-    worker_1.addEventListener('message', function(e) {
-
-    if (e.data.status !== undefined)
-    {
-
-
-      switch(e.data.status) {
-        case 'created':
-          document.getElementById('w1_status').textContent='Created';
-          break;
-        case 'starting':
-          document.getElementById('w1_status').textContent='Starting';
-          break;
-        
-        case 'working':
-          document.getElementById('w1_status').textContent='Working';
-          if (fitness_data_w1.labels.length > 10)
-          {
-            fitness_chart_w1.removeData( );
-          }
-    
-          fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
-          fitness_chart_w1.update();
-    
-          for (var i=0; i<e.data.best.length; i++)
-          {
-          chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
-        
-          }
-          chromosome_chart_w1.update();
-          document.getElementById('w1_gen').textContent=e.data.generation_count.toString() + ":" + e.data.pop_size.toString();
-          document.getElementById('w1_best').textContent=e.data.fitness;
-          document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
-          break;
-
-        case 'finished':
-            for (var i=0; i<e.data.best.length; i++)
-              {
-              chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
-            
-              }
-              chromosome_chart_w1.update();
-              document.getElementById('w1_gen').textContent=e.data.generation_count.toString() + ":" + e.data.pop_size.toString();
-              document.getElementById('w1_best').textContent=e.data.fitness;
-              fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
-              fitness_chart_w1.update();
-              document.getElementById('w1_status').textContent='Finished';
-              terminate_workers();
-
-            break;
-        case 'no_work':
-            document.getElementById('w1_status').textContent='Finished';
-            
-            break;
-        default:
-         }
-
-
-    }
-
-
-  }, false);
-
-    //worker_2 = new Worker('js/trapWorker.js');
     worker_2.addEventListener('message', function(e) {
           if (e.data.status !== undefined)
     {
@@ -487,13 +446,6 @@ padding-right: 10px;
   }, false);
 
   set_population(config);
-  document.getElementById('w1_pop').textContent=config.population_size;
-
-  
-  worker_1.postMessage({'cmd': 'start', 'config': config});
-  worker_1.postMessage({'cmd': 'evolve'});
-
-  set_population(config);
   document.getElementById('w2_pop').textContent=config.population_size;
 
   worker_2.postMessage({'cmd': 'start', 'config': config});
@@ -502,11 +454,96 @@ padding-right: 10px;
      
   }
 
+  var setup_worker_1 = function() {
+
+
+      if(typeof(Worker) !== "undefined") {
+          if(typeof(worker_1) == "undefined") {
+              worker_1 = new Worker('js/trapWorker.js');
+          }
+        }
+
+       worker_1.addEventListener('message', function(e) {
+
+    if (e.data.status !== undefined)
+    {
+
+
+      switch(e.data.status) {
+        case 'created':
+          document.getElementById('w1_status').textContent='Created';
+          break;
+        case 'starting':
+          document.getElementById('w1_status').textContent='Starting';
+          break;
+
+        case 'working':
+          document.getElementById('w1_status').textContent='Working';
+          if (fitness_data_w1.labels.length > 10)
+          {
+            fitness_chart_w1.removeData( );
+          }
+
+          fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
+          fitness_chart_w1.update();
+
+          for (var i=0; i<e.data.best.length; i++)
+          {
+          chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
+
+          }
+          chromosome_chart_w1.update();
+          document.getElementById('w1_gen').textContent=e.data.generation_count.toString() + ":" + e.data.pop_size.toString();
+          document.getElementById('w1_best').textContent=e.data.fitness;
+          document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
+          break;
+
+        case 'finished':
+            for (var i=0; i<e.data.best.length; i++)
+              {
+              chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
+
+              }
+              chromosome_chart_w1.update();
+              document.getElementById('w1_gen').textContent=e.data.generation_count.toString() + ":" + e.data.pop_size.toString();
+              document.getElementById('w1_best').textContent=e.data.fitness;
+              fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
+              fitness_chart_w1.update();
+              document.getElementById('w1_status').textContent='Finished';
+              terminate_workers();
+
+            break;
+        case 'no_work':
+            document.getElementById('w1_status').textContent='Finished';
+
+            break;
+        default:
+         }
+
+    }
+
+  }, false);
+
+  set_population(config);
+  document.getElementById('w1_pop').textContent=config.population_size;
+
+
+  worker_1.postMessage({'cmd': 'start', 'config': config});
+  worker_1.postMessage({'cmd': 'evolve'});
+
+
+
+
+
+  }
+
+
+
   </script>
 
 
 
-  
+
 
   </body>
 </html>
