@@ -291,10 +291,7 @@ padding-right: 10px;
 
     fitness_chart_w2 = new Chart(fitness_w2).Line( fitness_data_w2, 
                 {
-                        scaleBeginAtZero : true,scaleShowGridLines : false,scaleShowHorizontalLines: false,
-                        scaleShowVerticalLines: true, barShowStroke : false, barStrokeWidth : 0, barValueSpacing : 0,
-                        barDatasetSpacing : 0,responsive: false, maintainAspectRatio: false ,  animation: false ,  
-                        maintainAspectRatio: true 
+                        responsive: false,  animation: false ,  maintainAspectRatio: true
 
                     });
     
@@ -311,7 +308,7 @@ padding-right: 10px;
         ]
     }
 
-    chromosome_data_w2.labels 
+
 
     chromosome_chart_w2 = new Chart(chromosome_w2).Bar(chromosome_data_w2, 
 
@@ -329,10 +326,12 @@ padding-right: 10px;
    $( document ).ready(function() {
 
      $("#start_w1").click(function () {
+            terminate_worker_1();
             setup_worker_1();
           });
 
      $("#start_w2").click(function () {
+             terminate_worker_1();
             setup_worker_2();
           });
 
