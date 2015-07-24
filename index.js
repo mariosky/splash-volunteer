@@ -115,6 +115,26 @@ app.put('/one/:chromosome/:fitness/:uuid', function(req, res){
     
 });
 
+
+// Logs worker info
+app.put('/worker/:uuid/:popsize', function(req, res){
+
+	var client_ip;
+		if ( ! process.env.OPENSHIFT_NODEJS_IP ) { // this is not openshift
+			client_ip = req.connection.remoteAddress;
+		} else {
+			client_ip = req.headers['x-forwarded-for'];
+		}
+
+		logger.info("worker", {
+			//IP: client_ip,
+			worker_uuid:req.params.uuid,
+		    pop_size:req.params.popsize} );
+		res.send( { length : 0 });
+
+});
+
+
 // Error check
 app.use(function(err, req, res, next){
     //check error information and respond accordingly

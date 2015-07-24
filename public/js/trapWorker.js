@@ -40,6 +40,11 @@ function start(config){
     //Worker uuid
     uuid = config.worker_uuid;
 
+    var xmlhttp = new XMLHttpRequest();
+    // And puts worker info
+    xmlhttp.open("PUT", "/worker/"+uuid+"/"+population_size, true);
+    xmlhttp.send();
+
     var generation_count=0;
 	
 }
