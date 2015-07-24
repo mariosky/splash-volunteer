@@ -81,7 +81,7 @@ app.get('/seq_number', function(req, res){
 });
 
 // Adds one chromosome to the pool, with fitness
-app.put('/one/:chromosome/:fitness', function(req, res){
+app.put('/one/:chromosome/:fitness/:uuid', function(req, res){
     if ( req.params.chromosome ) {
 	chromosomes[ req.params.chromosome ] = req.params.fitness; // to avoid repeated chromosomes
 	var client_ip;
@@ -99,7 +99,8 @@ app.put('/one/:chromosome/:fitness', function(req, res){
 
 	logger.info("put", { chromosome: req.params.chromosome,
 			     fitness: parseInt(req.params.fitness),
-			     IP: client_ip } );
+			     IP: client_ip,
+	             worker_uuid:req.params.uuid} );
 	res.send( { length : Object.keys(chromosomes).length });
 	if ( app.is_solution( req.params.chromosome, req.params.fitness, app.config.vars.traps, app.config.vars.b ) ) {
 	    console.log( "Solution!");

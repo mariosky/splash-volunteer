@@ -408,7 +408,9 @@ padding-right: 10px;
 
         if(typeof(Worker) !== "undefined") {
           if(typeof(worker_2) == "undefined") {
+
               worker_2 = new Worker('js/trapWorker.js');
+              worker_2.uuid = generateUUID();
           }
         }
 
@@ -473,9 +475,10 @@ padding-right: 10px;
   }, false);
 
   set_population(config);
+  config.worker_uuid = worker_2.uuid;
   document.getElementById('w2_pop').textContent=config.population_size;
 
-  worker_2.postMessage({'cmd': 'start', 'config': config});
+  worker_2.postMessage({'cmd': 'start', 'config': config });
   worker_2.postMessage({'cmd': 'evolve'});
 
      
@@ -487,6 +490,7 @@ padding-right: 10px;
       if(typeof(Worker) !== "undefined") {
           if(typeof(worker_1) == "undefined") {
               worker_1 = new Worker('js/trapWorker.js');
+              worker_1.uuid = generateUUID();
           }
         }
 
@@ -552,6 +556,7 @@ padding-right: 10px;
   }, false);
 
   set_population(config);
+  config.worker_uuid = worker_1.uuid;
   document.getElementById('w1_pop').textContent=config.population_size;
 
 
@@ -564,7 +569,15 @@ padding-right: 10px;
 
   }
 
-
+  function generateUUID(){
+      var d = new Date().getTime();
+      var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = (d + Math.random()*16)%16 | 0;
+          d = Math.floor(d/16);
+          return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+      });
+      return uuid;
+  };
 
   </script>
 

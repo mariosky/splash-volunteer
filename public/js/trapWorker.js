@@ -33,10 +33,12 @@ function start(config){
 					 "b": trap_b, 
 					 "z": trap_len -1  } );
     
-    eo = new Nodeo( { population_size: population_size,
+    eo = new Nodeo( {
+                population_size: population_size,
 			    chromosome_size: chromosome_size,
 			    fitness_func: trap_fitness } );
-   
+    //Worker uuid
+    uuid = config.worker_uuid;
 
     var generation_count=0;
 	
@@ -93,7 +95,7 @@ function do_ea() {
           
         var xmlhttp2 = new XMLHttpRequest();
         // And puts another one in the pool
-        xmlhttp2.open("PUT", "/one/"+eo.population[0].string+"/"+eo.population[0].fitness, true);
+        xmlhttp2.open("PUT", "/one/"+eo.population[0].string+"/"+eo.population[0].fitness+"/"+uuid, true);
         xmlhttp2.send();
 
         //IPs
@@ -142,7 +144,7 @@ function do_ea() {
                     });
         // And puts another one in the pool
         var xmlhttp4 = new XMLHttpRequest();
-        xmlhttp4.open("PUT", "/one/"+eo.population[0].string+"/"+eo.population[0].fitness, true);
+        xmlhttp4.open("PUT", "/one/"+eo.population[0].string+"/"+eo.population[0].fitness+"/"+uuid, true);
         xmlhttp4.send();
         console.log('finished after')
 
