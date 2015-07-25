@@ -76,6 +76,7 @@ padding-right: 10px;
                     <li class="list-group-item"> Population size <span  id="w1_pop" class="badge"></span> </li>
                     <li class="list-group-item"> Current generation  <span id="w1_gen" class="badge"></span> </li>
                     <li class="list-group-item"> Best fitness   <span id="w1_best" class="badge"></span> </li>
+                    <li class="list-group-item"> Number of solutions found  <span id="w1_finished" class="badge"> 0 </span> </li>
                 
                 </ul>
               </div>
@@ -122,6 +123,7 @@ padding-right: 10px;
                     <li class="list-group-item"> Population size <span id="w2_pop" class="badge"></span> </li>
                     <li class="list-group-item"> Current generation  <span id="w2_gen" class="badge"></span> </li>
                     <li class="list-group-item"> Best fitness  <span id="w2_best" class="badge"></span> </li>
+                    <li class="list-group-item"> Number of solutions found  <span id="w2_finished" class="badge"> 0 </span> </li>
                 
                 </ul>
               </div>
@@ -388,6 +390,8 @@ padding-right: 10px;
         }
         document.getElementById('w1_status').textContent='Finished';
 
+
+
   }
 
     var terminate_worker_2  = function()
@@ -400,7 +404,9 @@ padding-right: 10px;
         }
         document.getElementById('w2_status').textContent='Finished';
 
-    }
+
+
+      }
 
 
   var setup_worker_2 = function()
@@ -410,11 +416,11 @@ padding-right: 10px;
           if(typeof(worker_2) == "undefined") {
 
               worker_2 = new Worker('js/trapWorker.js');
-              worker_2.uuid = generateUUID();
+
           }
         }
-
-
+    worker_2.uuid = generateUUID();
+    worker_2.count=0;
     worker_2.addEventListener('message', function(e) {
           if (e.data.status !== undefined)
     {
@@ -449,23 +455,31 @@ padding-right: 10px;
           document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
           break;
       case 'finished':
-            for (var i=0; i<e.data.best.length; i++)
-              {
-              chromosome_chart_w2.datasets[0].bars[i].value =e.data.best[i];
-            
-              }
-              chromosome_chart_w2.update();
-              document.getElementById('w2_gen').textContent=e.data.generation_count.toString();
-              document.getElementById('w2_best').textContent=e.data.fitness;
-              fitness_chart_w2.addData([e.data.fitness],e.data.generation_count);
-              fitness_chart_w2.update();
 
-              document.getElementById('w2_status').textContent='Finished';
-              //terminate_worker_2();
-              
+            if  (worker_2.count == 0) {
+                for (var i = 0; i < e.data.best.length; i++) {
+                    chromosome_chart_w2.datasets[0].bars[i].value = e.data.best[i];
+
+                }
+                chromosome_chart_w2.update();
+                document.getElementById('w2_gen').textContent = e.data.generation_count.toString();
+                document.getElementById('w2_best').textContent = e.data.fitness;
+                fitness_chart_w2.addData([e.data.fitness], e.data.generation_count);
+                fitness_chart_w2.update();
+
+                document.getElementById('w2_status').textContent = 'Finished';
+                document.getElementById('w2_finished').textContent = parseInt(document.getElementById('w2_finished').textContent) + 1;
+
+                setTimeout(setup_worker_2, 20000);
+                console.log('finished'+ worker_2.count++);
+
+            }
+
         case 'no_work':
-            document.getElementById('w2_status').textContent='Finished';
-            break;
+            //document.getElementById('w2_status').textContent='no work';
+            //document.getElementById('w2_finished').textContent = parseInt(document.getElementById('w2_finished').textContent)+1 ;
+            //setTimeout(setup_worker_2, 20000);
+            //break;
         default:
       }
 
@@ -490,10 +504,11 @@ padding-right: 10px;
       if(typeof(Worker) !== "undefined") {
           if(typeof(worker_1) == "undefined") {
               worker_1 = new Worker('js/trapWorker.js');
-              worker_1.uuid = generateUUID();
+
           }
         }
-
+      worker_1.count=0;
+      worker_1.uuid = generateUUID();
        worker_1.addEventListener('message', function(e) {
 
     if (e.data.status !== undefined)
@@ -530,6 +545,8 @@ padding-right: 10px;
           break;
 
         case 'finished':
+
+            if  (worker_1.count == 0) {
             for (var i=0; i<e.data.best.length; i++)
               {
               chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
@@ -541,11 +558,17 @@ padding-right: 10px;
               fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
               fitness_chart_w1.update();
               document.getElementById('w1_status').textContent='Finished';
-              //terminate_worker_1();
+              document.getElementById('w1_finished').textContent = parseInt(document.getElementById('w1_finished').textContent)+1 ;
+              setTimeout(setup_worker_1, 20000);
+              console.log('finished'+ worker_1.count++);
+
+            }
 
             break;
         case 'no_work':
-            document.getElementById('w1_status').textContent='Finished';
+            document.getElementById('w1_status').textContent='no_work';
+            //document.getElementById('w1_finished').textContent = parseInt(document.getElementById('w1_finished').textContent)+1 ;
+            //setTimeout(setup_worker_1, 20000);
 
             break;
         default:

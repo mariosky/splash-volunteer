@@ -127,7 +127,7 @@ app.put('/worker/:uuid/:popsize', function(req, res){
 		}
 
 		logger.info("worker", {
-			//IP: client_ip,
+			IP: client_ip,
 			worker_uuid:req.params.uuid,
 		    pop_size:req.params.popsize} );
 		res.send( { length : 0 });

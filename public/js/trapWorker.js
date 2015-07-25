@@ -124,6 +124,7 @@ function do_ea() {
 
                 }
 
+
             }
         xmlhttp3.open("GET", url, true);
         xmlhttp3.send();
@@ -133,31 +134,30 @@ function do_ea() {
     }
 
     if ( eo.population[0].fitness < traps*trap_b ) {
-        console.log('iter');
+
         setTimeout(do_ea, 5);
-        }
+
+    }
     
     else{
-                postMessage( 
-                    { 
-                    status:'finished',     
-                    generation_count:eo.generation_count, 
-                    best:eo.population[0].string, 
-                    fitness:eo.population[0].fitness,
-                    'period':period,
-                    pop_size: eo.population.length
-                    });
+
         // And puts another one in the pool
         var xmlhttp4 = new XMLHttpRequest();
         xmlhttp4.open("PUT", "/one/"+eo.population[0].string+"/"+eo.population[0].fitness+"/"+uuid, true);
         xmlhttp4.send();
+
+        postMessage(
+            {
+                status:'finished',
+                generation_count:eo.generation_count,
+                best:eo.population[0].string,
+                fitness:eo.population[0].fitness,
+                'period':period,
+                pop_size: eo.population.length
+            });
+
         console.log('finished after')
-
-        
-
-       
-                
-
+        //close();
     }
 }
 
