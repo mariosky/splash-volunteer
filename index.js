@@ -19,7 +19,7 @@ if (!fs.existsSync(log_dir)){
     fs.mkdirSync(log_dir);
 }
 // set up static dir
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/public'));
 
 // set up experimente sequence
 var sequence = 0;
@@ -53,6 +53,7 @@ var chromosomes = {};
 var IPs = {};
 
 // Retrieves a random chromosome
+//
 app.get('/random', function(req, res){
     if (Object.keys(chromosomes ).length > 0) {
 	var keys = Object.keys(chromosomes );

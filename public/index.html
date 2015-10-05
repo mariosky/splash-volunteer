@@ -66,37 +66,37 @@ padding-right: 10px;
 
      <div class="col-md-12">
 		 	<div class="panel panel-default">
-  			<div class="panel-heading"> <i class="fa fa-cog"></i> Worker 1  <span id='w1_status' class="label label-info"> status </span> </div>
+  			<div class="panel-heading"> <i class="fa fa-cog"></i> Worker <span id='worker_status' class="label label-info"> status </span> </div>
 		  	<div class="panel-body">
 
              <div class="row">
       		    <div class="col-md-4">
-                 <h4>Worker 1 information</h4> 
+                 <h4>Worker information</h4>
                 <ul class="list-group">
-                    <li class="list-group-item"> Population size <span  id="w1_pop" class="badge"></span> </li>
-                    <li class="list-group-item"> Current generation  <span id="w1_gen" class="badge"></span> </li>
-                    <li class="list-group-item"> Best fitness   <span id="w1_best" class="badge"></span> </li>
-                    <li class="list-group-item"> Number of solutions found  <span id="w1_finished" class="badge"> 0 </span> </li>
+                    <li class="list-group-item"> Population size <span  id="worker_population_size" class="badge"></span> </li>
+                    <li class="list-group-item"> Current generation  <span id="worker_current_generation" class="badge"></span> </li>
+                    <li class="list-group-item"> Best fitness   <span id="worker_current_best" class="badge"></span> </li>
+                    <li class="list-group-item"> Number of solutions found  <span id="number_of_solutions_found" class="badge"> 0 </span> </li>
                 
                 </ul>
               </div>
 
       				<div class="col-md-4">
                 <h4>Fitness</h4>
-      						<canvas id="fitness_w1" class="worker_line" ></canvas>
+      						<canvas id="fitness" class="worker_line" ></canvas>
       				</div>
       				
 
               <div class="col-md-4">
                    <h4>Best Chromosome</h4>
-                  <canvas id="chromosome_w1" class="worker_line" ></canvas>
+                  <canvas id="chromosome" class="worker_line" ></canvas>
               </div>
 
 
       		</div>
            <div class="row">
               <div class="col-md-2">
-                <button type="button" class="btn btn-danger btn-sm" id="start_w1">Re-start</button>
+                <button type="button" class="btn btn-danger btn-sm" id="re-start">Re-start</button>
               </div>
             </div>
       	</div>
@@ -105,55 +105,8 @@ padding-right: 10px;
 	   </div>
 
 
-
-
    </div>
-   <!---->
-   <!-- WORKER 2-->
-   <!---->
-   <div class="row">
-     <div class="col-md-12">
-      <div class="panel panel-default">
-        <div class="panel-heading"> <i class="fa fa-cog"></i> Worker 2 <span id='w2_status' class="label label-info"> status </span></div>
-        <div class="panel-body">
-            <div class="row"> 
-              <div class="col-md-4">
-                 <h4>Worker 1 information</h4>
-                <ul class="list-group">
-                    <li class="list-group-item"> Population size <span id="w2_pop" class="badge"></span> </li>
-                    <li class="list-group-item"> Current generation  <span id="w2_gen" class="badge"></span> </li>
-                    <li class="list-group-item"> Best fitness  <span id="w2_best" class="badge"></span> </li>
-                    <li class="list-group-item"> Number of solutions found  <span id="w2_finished" class="badge"> 0 </span> </li>
-                
-                </ul>
-              </div>
 
-              <div class="col-md-4">
-                <h4>Fitness</h4>
-                  <canvas id="fitness_w2" class="worker_line" ></canvas>
-              </div>
-              
-
-              <div class="col-md-4">
-                   <h4>Best Chromosome</h4>
-                  <canvas id="chromosome_w2" class="worker_line" ></canvas>
-              </div>
-
-
-          </div>
-            <div class="row">
-              <div class="col-md-2">
-                <button type="button" class="btn btn-danger btn-sm" id="start_w2">Re-start</button>
-              </div>
-            </div>
-
-      </div>
-
-
-     </div>
-     </div>   
-  </div>         
-  
 
 
 
@@ -215,33 +168,15 @@ padding-right: 10px;
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
    <script>
-  var worker_1;
-  var worker_2;
 
 
-  var config = {  
-      populatiom_min:128,
-      population_max:256,
-      random_population:true,
-
-      population_size : 128,
-        period :  100,
-        traps : 40,
-      trap_len : 4,
-        trap_b :  2
-  }
 
 
-    var fitness_w1 = document.getElementById('fitness_w1').getContext('2d');
-    var chromosome_w1 = document.getElementById('chromosome_w1').getContext('2d');
-
-
-    var fitness_w2 = document.getElementById('fitness_w2').getContext('2d');
-    var chromosome_w2 = document.getElementById('chromosome_w2').getContext('2d');
-
+    var fitness = document.getElementById('fitness').getContext('2d');
+    var chromosome = document.getElementById('chromosome').getContext('2d');
 
     // Chart data
-    fitness_data_w1 = {
+    fitness_data = {
         labels : [],
         datasets : [
             {
@@ -252,355 +187,181 @@ padding-right: 10px;
                 data : []
             }
         ]
-    }
+    };
 
-    fitness_chart_w1 = new Chart(fitness_w1).Line( fitness_data_w1, {  responsive: false,  animation: false ,  maintainAspectRatio: true});
+    fitness_chart = new Chart(fitness).Line( fitness_data, {  responsive: false,  animation: false ,  maintainAspectRatio: true});
 
-    chromosome_data_w1 ={
+    chromosome_data ={
         labels : Array.apply(null, new Array(160)).map(String.prototype.valueOf,""),
         datasets : [
             {
             fillColor:  "rgba(0,0,0,0.8)",
             strokeColor: "rgba(0,0,0,0.8)",
-            data : Array.apply(null, new Array(160)).map(Number.prototype.valueOf,0),
+            data : Array.apply(null, new Array(160)).map(Number.prototype.valueOf,0)
             }
         ]
-    }
+    };
 
-    chromosome_chart_w1 = new Chart(chromosome_w1).Bar(chromosome_data_w1, 
+    chromosome_chart = new Chart(chromosome).Bar(chromosome_data,
 
                     {
                         scaleBeginAtZero : true,scaleShowGridLines : false,scaleShowHorizontalLines: false,
                         scaleShowVerticalLines: true, barShowStroke : false, barStrokeWidth : 0, barValueSpacing : 0,
-                        barDatasetSpacing : 0,responsive: false, maintainAspectRatio: false ,  animation: false ,  
+                        barDatasetSpacing : 0,responsive: false, animation: false ,
                         maintainAspectRatio: true 
 
                     });
 
-      
-      fitness_data_w2 = {
-        labels : [],
-        datasets : [
-            {
-                fillColor : "rgba(172,194,132,0.4)",
-                strokeColor : "#ACC26D",
-                pointColor : "#fff",
-                pointStrokeColor : "#9DB86D",
-                data : []
-            }
-        ]
-    }
 
-    fitness_chart_w2 = new Chart(fitness_w2).Line( fitness_data_w2, 
-                {
-                        responsive: false,  animation: false ,  maintainAspectRatio: true
-
-                    });
-    
-    chromosome_data_w2 ={
-        labels : Array.apply(null, new Array(160)).map(String.prototype.valueOf,""),
-        datasets : [
-            {
-            fillColor:  "rgba(0,0,0,0.8)",
-            strokeColor: "rgba(0,0,0,0.8)",
-            //highlightFill: "rgba(220,220,220,0.75)",
-            //highlightStroke: "rgba(220,220,220,1)",
-            data : Array.apply(null, new Array(160)).map(Number.prototype.valueOf,0),
-            }
-        ]
-    }
-
-
-
-    chromosome_chart_w2 = new Chart(chromosome_w2).Bar(chromosome_data_w2, 
-
-                    {
-                        scaleBeginAtZero : true,scaleShowGridLines : false,scaleShowHorizontalLines: false,
-                        scaleShowVerticalLines: true, barShowStroke : false, barStrokeWidth : 0, barValueSpacing : 0,
-                        barDatasetSpacing : 0,responsive: false, maintainAspectRatio: false ,  animation: false ,  
-                        maintainAspectRatio: true 
-
-                    });
 
 
 
 
    $( document ).ready(function() {
 
-     $("#start_w1").click(function () {
-           // terminate_worker_1();
-            setup_worker_1();
+     $("#re-start").click(function () {
+            setup_worker();
           });
 
-     $("#start_w2").click(function () {
-          //   terminate_worker_2();
-            setup_worker_2();
-          });
-
-    setup_worker_1();
-    setup_worker_2();
+    setup_worker();
+ 	});
 
 
 
 
-	});
 
-  var set_population = function( config)
-      {
-        if (config.random_population)
-        {
-          pop_size=Math.floor( (Math.random() * (config.population_max-config.populatiom_min)) + config.populatiom_min); 
+
+
+
+
+  var terminate_worker  = function()
+  {
+        if(typeof(Worker) !== "undefined") {
+          if(typeof(worker) != "undefined") {
+              worker.terminate();
+          }
+        }
+        document.getElementById('worker_status').textContent='Finished';
+
+  };
+
+
+  var setup_worker = function() {
+
+
+      if (typeof(Worker) !== "undefined") {
+          if (typeof(worker) == "undefined") {
+              worker = new Worker('js/trapWorker.js');
+
+          }
+      }
+      worker.count = 0;
+      worker.uuid = generateUUID();
+      worker.addEventListener('message', function (e) {
+
+          if (e.data.status !== undefined) {
+
+
+              switch (e.data.status) {
+                  case 'created':
+                      document.getElementById('worker_status').textContent = 'Created';
+                      break;
+                  case 'starting':
+                      document.getElementById('worker_status').textContent = 'Starting';
+                      break;
+
+                  case 'working':
+                      document.getElementById('worker_status').textContent = 'Working';
+                      if (fitness_data.labels.length > 10) {
+                          fitness_chart.removeData();
+                      }
+
+                      fitness_chart.addData([e.data.fitness], e.data.generation_count);
+                      fitness_chart.update();
+
+                      for (var i = 0; i < e.data.best.length; i++) {
+                          chromosome_chart.datasets[0].bars[i].value = e.data.best[i];
+
+                      }
+                      chromosome_chart.update();
+                      document.getElementById('worker_current_generation').textContent = e.data.generation_count.toString();
+                      document.getElementById('worker_current_best').textContent = e.data.fitness;
+                      document.getElementById('ips').textContent = e.data.ips + ' User(s) Collaborating';
+                      break;
+
+                  case 'finished':
+
+                      if (worker.count == 0) {
+                          for (var i = 0; i < e.data.best.length; i++) {
+                              chromosome_chart.datasets[0].bars[i].value = e.data.best[i];
+
+                          }
+                          chromosome_chart.update();
+                          document.getElementById('worker_current_generation').textContent = e.data.generation_count.toString();
+                          document.getElementById('worker_current_best').textContent = e.data.fitness;
+                          fitness_chart.addData([e.data.fitness], e.data.generation_count);
+                          fitness_chart.update();
+                          document.getElementById('worker_status').textContent = 'Finished';
+                          document.getElementById('number_of_solutions_found').textContent = parseInt(document.getElementById('number_of_solutions_found').textContent) + 1;
+                          setTimeout(setup_worker, 20000);
+                          console.log('finished' + worker.count++);
+
+                      }
+
+                      break;
+                  case 'no_work':
+                      document.getElementById('worker_status').textContent = 'no_work';
+                      break;
+                  default:
+              }
+
+          }
+
+      }, false);
+
+
+      var config = {
+
+          population_size: get_random_population(128, 256),
+          period: 100,
+          traps: 40,
+          trap_len: 4,
+          trap_b: 2
+      };
+
+
+      // Random poulatio between min and max
+      //
+
+      function get_random_population(population_min, population_max) {
+
+          pop_size = Math.floor((Math.random() * (population_max - population_min)) + population_min);
           //population has to be an even number?
-          if (pop_size%2 == 1)
-          {
+          if (pop_size % 2 == 1) {
               pop_size++;
           }
-          config.population_size=pop_size;
-        }
-
-        return config;
-
-      } 
-
-  var terminate_workers = function()
-  {
-        if(typeof(Worker) !== "undefined") {
-          if(typeof(worker_1) != "undefined") {
-              worker_1.terminate();
-          }
-        }
-        if(typeof(Worker) !== "undefined") {
-          if(typeof(worker_2) != "undefined") {
-              worker_2.terminate();
-          }
-        }
-
-        document.getElementById('w1_status').textContent='Finished';
-        document.getElementById('w2_status').textContent='Finished';
-     
-  }
-
-
-  var terminate_worker_1  = function()
-  {
-        if(typeof(Worker) !== "undefined") {
-          if(typeof(worker_1) != "undefined") {
-              worker_1.terminate();
-          }
-        }
-        document.getElementById('w1_status').textContent='Finished';
-
-
-
-  }
-
-    var terminate_worker_2  = function()
-      {
-
-        if(typeof(Worker) !== "undefined") {
-          if(typeof(worker_2) != "undefined") {
-              worker_2.terminate();
-          }
-        }
-        document.getElementById('w2_status').textContent='Finished';
-
-
+          return pop_size;
 
       }
 
+      document.getElementById('worker_population_size').textContent = config.population_size;
+      config.worker_uuid = worker.uuid;
 
-  var setup_worker_2 = function()
-  {
+      worker.postMessage({'cmd': 'start', 'config': config});
+      worker.postMessage({'cmd': 'evolve'});
 
-        if(typeof(Worker) !== "undefined") {
-          if(typeof(worker_2) == "undefined") {
 
-              worker_2 = new Worker('js/trapWorker.js');
-
-          }
-        }
-    worker_2.uuid = generateUUID();
-    worker_2.count=0;
-    worker_2.addEventListener('message', function(e) {
-          if (e.data.status !== undefined)
-    {
-
-      console.log('w2:'+e.data.status); 
-      switch(e.data.status) {
-        case 'created':
-          document.getElementById('w2_status').textContent='Created';
-          break;
-        case 'starting':
-          document.getElementById('w2_status').textContent='Starting';
-          break;
-        
-        case 'working':
-          document.getElementById('w2_status').textContent='Working';
-          if (fitness_data_w2.labels.length > 10)
-          {
-            fitness_chart_w2.removeData( );
-          }
-    
-          fitness_chart_w2.addData([e.data.fitness],e.data.generation_count);
-          fitness_chart_w2.update();
-    
-          for (var i=0; i<e.data.best.length; i++)
-          {
-          chromosome_chart_w2.datasets[0].bars[i].value =e.data.best[i];
-        
-          }
-          chromosome_chart_w2.update();
-          document.getElementById('w2_gen').textContent=e.data.generation_count;
-          document.getElementById('w2_best').textContent=e.data.fitness;
-          document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
-          break;
-      case 'finished':
-
-            if  (worker_2.count == 0) {
-                for (var i = 0; i < e.data.best.length; i++) {
-                    chromosome_chart_w2.datasets[0].bars[i].value = e.data.best[i];
-
-                }
-                chromosome_chart_w2.update();
-                document.getElementById('w2_gen').textContent = e.data.generation_count.toString();
-                document.getElementById('w2_best').textContent = e.data.fitness;
-                fitness_chart_w2.addData([e.data.fitness], e.data.generation_count);
-                fitness_chart_w2.update();
-
-                document.getElementById('w2_status').textContent = 'Finished';
-                document.getElementById('w2_finished').textContent = parseInt(document.getElementById('w2_finished').textContent) + 1;
-
-                setTimeout(setup_worker_2, 20000);
-                console.log('finished'+ worker_2.count++);
-
-            }
-
-        case 'no_work':
-            //document.getElementById('w2_status').textContent='no work';
-            //document.getElementById('w2_finished').textContent = parseInt(document.getElementById('w2_finished').textContent)+1 ;
-            //setTimeout(setup_worker_2, 20000);
-            //break;
-        default:
+      function generateUUID() {
+          var d = new Date().getTime();
+          var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+              var r = (d + Math.random() * 16) % 16 | 0;
+              d = Math.floor(d / 16);
+              return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+          });
+          return uuid;
       }
 
-  
-
-    }
-  }, false);
-
-  set_population(config);
-  config.worker_uuid = worker_2.uuid;
-  document.getElementById('w2_pop').textContent=config.population_size;
-
-  worker_2.postMessage({'cmd': 'start', 'config': config });
-  worker_2.postMessage({'cmd': 'evolve'});
-
-     
   }
-
-  var setup_worker_1 = function() {
-
-
-      if(typeof(Worker) !== "undefined") {
-          if(typeof(worker_1) == "undefined") {
-              worker_1 = new Worker('js/trapWorker.js');
-
-          }
-        }
-      worker_1.count=0;
-      worker_1.uuid = generateUUID();
-       worker_1.addEventListener('message', function(e) {
-
-    if (e.data.status !== undefined)
-    {
-
-
-      switch(e.data.status) {
-        case 'created':
-          document.getElementById('w1_status').textContent='Created';
-          break;
-        case 'starting':
-          document.getElementById('w1_status').textContent='Starting';
-          break;
-
-        case 'working':
-          document.getElementById('w1_status').textContent='Working';
-          if (fitness_data_w1.labels.length > 10)
-          {
-            fitness_chart_w1.removeData( );
-          }
-
-          fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
-          fitness_chart_w1.update();
-
-          for (var i=0; i<e.data.best.length; i++)
-          {
-          chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
-
-          }
-          chromosome_chart_w1.update();
-          document.getElementById('w1_gen').textContent=e.data.generation_count.toString();
-          document.getElementById('w1_best').textContent=e.data.fitness;
-          document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
-          break;
-
-        case 'finished':
-
-            if  (worker_1.count == 0) {
-            for (var i=0; i<e.data.best.length; i++)
-              {
-              chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
-
-              }
-              chromosome_chart_w1.update();
-              document.getElementById('w1_gen').textContent=e.data.generation_count.toString();
-              document.getElementById('w1_best').textContent=e.data.fitness;
-              fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
-              fitness_chart_w1.update();
-              document.getElementById('w1_status').textContent='Finished';
-              document.getElementById('w1_finished').textContent = parseInt(document.getElementById('w1_finished').textContent)+1 ;
-              setTimeout(setup_worker_1, 20000);
-              console.log('finished'+ worker_1.count++);
-
-            }
-
-            break;
-        case 'no_work':
-            document.getElementById('w1_status').textContent='no_work';
-            //document.getElementById('w1_finished').textContent = parseInt(document.getElementById('w1_finished').textContent)+1 ;
-            //setTimeout(setup_worker_1, 20000);
-
-            break;
-        default:
-         }
-
-    }
-
-  }, false);
-
-  set_population(config);
-  config.worker_uuid = worker_1.uuid;
-  document.getElementById('w1_pop').textContent=config.population_size;
-
-
-  worker_1.postMessage({'cmd': 'start', 'config': config});
-  worker_1.postMessage({'cmd': 'evolve'});
-
-
-
-
-
-  }
-
-  function generateUUID(){
-      var d = new Date().getTime();
-      var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = (d + Math.random()*16)%16 | 0;
-          d = Math.floor(d/16);
-          return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-      });
-      return uuid;
-  };
 
   </script>
 
