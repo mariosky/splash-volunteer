@@ -77,11 +77,8 @@ function do_ea() {
                     //There is no population
                     postMessage(
                         {
-                            status:'no_work',
-                            generation_count:eo.generation_count,
-                            best:eo.population[0].string,
-                            fitness:eo.population[0].fitness,'period':period,
-                            pop_size: eo.population.length
+                            status:'no_work'
+
                         });
                     console.log("AFTER 404");
                     //No more work
@@ -97,7 +94,7 @@ function do_ea() {
 
         var xmlhttp2 = new XMLHttpRequest();
         // And puts another one in the pool
-        console.log(eo.population[0].vector);
+        //console.log(eo.population[0].vector);
 
         xmlhttp2.open("PUT", "/one/"+eo.population[0].vector+"/"+eo.population[0].fitness+"/"+uuid, true);
         xmlhttp2.send();
@@ -115,7 +112,7 @@ function do_ea() {
                 postMessage(
                     {   status:'working',
                         generation_count:eo.generation_count,
-                        best:eo.population[0].string,
+                        best:eo.population[0].vector,
                         fitness:eo.population[0].fitness,'period':period,'ips':ips,
                         pop_size: eo.population.length
                     });
@@ -634,7 +631,7 @@ var CF={
 
 
 function incorporate( chromosome ) {
-    console.log(chromosome);
+    //console.log(chromosome);
 
     chromosome = chromosome.split(',').map(parseFloat);
     if ( chromosome.length != this.chromosome_size )
