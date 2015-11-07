@@ -259,7 +259,7 @@ padding-right: 10px;
         ]
     }
 
-    fitness_chart_w1 = new Chart(fitness_w1).Line( fitness_data_w1, {  responsive: false,  animation: false ,  maintainAspectRatio: true});
+    fitness_chart_w1 = new Chart(fitness_w1).Line( fitness_data_w1, {  responsive: false,  animation: false ,  maintainAspectRatio: true, bezierCurve: false});
 
     chromosome_data_w1 ={
         labels :  Array.apply(null, new Array(160)).map(String.prototype.valueOf,""),
@@ -300,7 +300,7 @@ padding-right: 10px;
 
     fitness_chart_w2 = new Chart(fitness_w2).Line( fitness_data_w2, 
                 {
-                        responsive: false,  animation: false ,  maintainAspectRatio: true
+                        responsive: false,  animation: false ,  maintainAspectRatio: true,bezierCurve: false
 
                     });
 
