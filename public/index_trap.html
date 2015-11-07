@@ -220,12 +220,15 @@ padding-right: 10px;
 
 
   var config = {  
-      populatiom_min:500,
-      population_max:700,
+      populatiom_min:128,
+      population_max:256,
       random_population:true,
-      period :  100,
-      population_size : 700
 
+      population_size : 128,
+        period :  100,
+        traps : 40,
+      trap_len : 4,
+        trap_b :  2
   }
 
 
@@ -412,7 +415,7 @@ padding-right: 10px;
         if(typeof(Worker) !== "undefined") {
           if(typeof(worker_2) == "undefined") {
 
-              worker_2 = new Worker('js/F15Worker.js');
+              worker_2 = new Worker('js/trapWorker.js');
 
           }
         }
@@ -500,7 +503,7 @@ padding-right: 10px;
 
       if(typeof(Worker) !== "undefined") {
           if(typeof(worker_1) == "undefined") {
-              worker_1 = new Worker('js/F15Worker.js');
+              worker_1 = new Worker('js/trapWorker.js');
 
           }
         }

@@ -17,6 +17,8 @@ console.log( "Experiment will end when fitness (sum of floats) is greater or equ
 
 do {
     eo.generation();
+    console.log(eo.population[0]);
+    console.log(eo.generation_count);
     console.log( eo.population[0].fitness.toFixed(4) );
 } while ( eo.population[0].fitness < chromosome_size*.95 ); // Fitness is reaching 95% of chromosome size
 
