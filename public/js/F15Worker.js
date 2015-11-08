@@ -46,13 +46,20 @@ function start(config){
 
 
 function do_ea() {
-
+    // DESCOMENTAR PARA VER EL RENDIMIENTO SOLO EN CHROME Y MOZILLA
+    // var t0 = performance.now();
     eo.generation();
+
+
     //if ( eo.population[0].fitness == traps*trap_b ) {
     //    console.log('finished before');
     //}
 
     if ( (eo.generation_count % period === 0) ) {
+      // DESCOMENTAR PARA VER EL RENDIMIENTO SOLO EN CHROME Y MOZILLA
+      //  var t1 = performance.now();
+
+      //  console.log( (t1 - t0) + ","+uuid)
 
 
         // gets a random chromosome from the pool
