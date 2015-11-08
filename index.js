@@ -86,8 +86,10 @@ app.get('/seq_number', function(req, res){
 app.put('/one/:chromosome/:fitness/:uuid', function(req, res){
     if ( req.params.chromosome ) {
 // Temporal solution for max_pool_size
+
 	if (Object.keys(chromosomes).length > max_pool_size )
 	{
+        console.log(Object.keys(chromosomes).length);
 		var keys = Object.keys(chromosomes );
 		var one = keys[ Math.floor(keys.length*Math.random())];
 		delete chromosomes[one];
