@@ -26,6 +26,8 @@ var sequence = 0;
 var temp = new Date();
 var date_str = temp.getFullYear() + "-" + (1 + temp.getMonth()) + "-"+ temp.getDate();
 
+var max_pool_size=10000;
+
 // create logger to console and file
 var logger = new (winston.Logger)({
     transports: [
@@ -83,7 +85,18 @@ app.get('/seq_number', function(req, res){
 // Adds one chromosome to the pool, with fitness
 app.put('/one/:chromosome/:fitness/:uuid', function(req, res){
     if ( req.params.chromosome ) {
+// Temporal solution for max_pool_size
+	if (Object.keys(chromosomes).length > max_pool_size )
+	{
+		var keys = Object.keys(chromosomes );
+		var one = keys[ Math.floor(keys.length*Math.random())];
+		delete chromosomes[one];
+
+	}
+
 	chromosomes[ req.params.chromosome ] = req.params.fitness; // to avoid repeated chromosomes
+
+
 	var client_ip;
 	if ( ! process.env.OPENSHIFT_NODEJS_IP ) { // this is not openshift
 	    client_ip = req.connection.remoteAddress;
