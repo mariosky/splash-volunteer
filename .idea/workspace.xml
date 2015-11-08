@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aec37e0e-b84a-424f-b03e-86fb7f70fa0d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/F15Local.js" afterPath="$PROJECT_DIR$/public/js/F15Local.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/F15Worker.js" afterPath="$PROJECT_DIR$/public/js/F15Worker.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -34,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58685446">
-              <caret line="302" column="108" selection-start-line="302" selection-start-column="108" selection-end-line="302" selection-end-column="108" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="231" column="22" selection-start-line="231" selection-start-column="22" selection-end-line="231" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -47,7 +49,7 @@
       <file leaf-file-name="index_trap.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/index_trap.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.375">
+            <state vertical-scroll-proportion="0.0">
               <caret line="259" column="83" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="83" />
               <folding />
             </state>
@@ -58,7 +60,17 @@
         <entry file="file://$PROJECT_DIR$/public/js/F15Worker.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="308" column="5" selection-start-line="306" selection-start-column="4" selection-end-line="308" selection-end-column="5" />
+              <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="F15Local.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/js/F15Local.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6923077">
+              <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -114,16 +126,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chromosome-float.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/nodeo/lib/nodeo/chromosome-float.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -148,10 +150,10 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/public/js/F15.js" />
         <option value="$PROJECT_DIR$/public/js/trapWorker.js" />
-        <option value="$PROJECT_DIR$/public/js/F15Local.js" />
         <option value="$PROJECT_DIR$/public/js/nodeo/app/classic-ea-float.js" />
         <option value="$PROJECT_DIR$/public/js/F15Worker.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/public/js/F15Local.js" />
       </list>
     </option>
   </component>
@@ -163,9 +165,9 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="127" />
+    <option name="x" value="447" />
     <option name="y" value="23" />
-    <option name="width" value="1773" />
+    <option name="width" value="1659" />
     <option name="height" value="1091" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -192,6 +194,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -266,80 +269,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="splash-volunteer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="splash-volunteer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="splash-volunteer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="splash-volunteer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="splash-volunteer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="splash-volunteer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -360,7 +289,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -377,212 +305,7 @@
       <recent name="$PROJECT_DIR$/public" />
     </key>
   </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/nodio-2015-11-2-0.log</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/log/nodio-2015-11-3-0.log</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/F15.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/F15Worker.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/.gitignore</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/.jshintrc</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/.npmignore</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/.travis.yml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/CONTRIBUTING.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/ChangeLog</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/Gruntfile.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/LICENSE</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/README.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/TODO.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/app/README.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/app/async-ea.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/app/benchmark-stuff.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/app/classic-ea-float.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/app/classic-ea-trap.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/app/classic-ea.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/app/createvm.sh</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/app/ea.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/app/nodeo.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/bower.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/dist/nodeo.standalone.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/dist/trap.standalone.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/infraestructura.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/Ackley.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/Antenna.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/HIFF.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/MMDP.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/Rastrigin.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/Utils.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/chromosome-float.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/chromosome.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/classic-float.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/classic.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/functions.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/ops.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/trap.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/lib/nodeo/vector.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/nodeo.lib.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/package.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/test/governance/lint.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/test/unit/classic.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/test/unit/fitness.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/test/unit/floats.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/test/unit/functions.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/test/unit/index.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/test/unit/npm-debug.log</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/test/unit/vector.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/web/use-nodeo.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/.npmignore</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/.travis.yml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/CHANGELOG.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/LICENSE</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/README.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/benchmark/bool.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/benchmark/engines.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/benchmark/integer.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/benchmark/real.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/bower.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/karma.conf.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/lib/random.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/lib/random.min.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/package.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/RandomSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/boolSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/dateSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/diceSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/dieSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/engines.browserCryptoSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/engines.mt19937Spec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/engines.nativeMathSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/hexSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/integerSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/pickSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/pickerSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/realSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/sampleSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/shuffleSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/stringSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/spec/uuid4Spec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random-js/test/engines.browserCryptoSpec.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/random.min.js</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/Ackley.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/MMDP.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/Utils.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/chromosome.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/classic.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/functions.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/ops.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/trap.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/public/js/nodeo/vector.js</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
-  </component>
-  <component name="RunManager" selected="Node.js.classic-ea-float.js">
+  <component name="RunManager" selected="Node.js.F15Worker.js">
     <configuration default="false" name="index.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" path-to-node="/usr/local/bin/node" path-to-js-file="index.js" working-dir="$PROJECT_DIR$">
       <method />
     </configuration>
@@ -637,9 +360,9 @@
     </list>
     <recent_temporary>
       <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Node.js.classic-ea-float.js" />
+        <item index="0" class="java.lang.String" itemvalue="Node.js.F15Worker.js" />
         <item index="1" class="java.lang.String" itemvalue="Node.js.index.js" />
-        <item index="2" class="java.lang.String" itemvalue="Node.js.F15Worker.js" />
+        <item index="2" class="java.lang.String" itemvalue="Node.js.classic-ea-float.js" />
       </list>
     </recent_temporary>
   </component>
@@ -693,25 +416,31 @@
       <option name="project" value="LOCAL" />
       <updated>1446920119593</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Sin curvas Bezier el fitness">
+      <created>1446920843298</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1446920843298</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="127" y="23" width="1773" height="1091" extended-state="0" />
-    <editor active="true" />
+    <frame x="447" y="23" width="1659" height="1091" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19977169" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21367522" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2898253" sideWeight="0.5022831" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2898253" sideWeight="0.4977169" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6379487" sideWeight="0.4977169" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -727,7 +456,8 @@
     <MESSAGE value="Each worker has a UUID, it is sended in each put one, and logged" />
     <MESSAGE value="Log Worker info" />
     <MESSAGE value="Working on F15 Worker" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working on F15 Worker" />
+    <MESSAGE value="Sin curvas Bezier el fitness" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sin curvas Bezier el fitness" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -736,6 +466,86 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/public/js/trapWorker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="392" column="54" selection-start-line="392" selection-start-column="54" selection-end-line="392" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index_trap.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="259" column="83" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/F15Worker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/nodeo/app/classic-ea-float.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/nodeo/lib/nodeo/trap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/nodeo/app/ea.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/nodeo/app/classic-ea-trap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/nodeo/lib/nodeo/chromosome-float.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/trapWorker.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -836,14 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/F15Local.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/F15.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -856,7 +658,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -888,7 +689,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -916,17 +716,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/F15Worker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="308" column="5" selection-start-line="306" selection-start-column="4" selection-end-line="308" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index_trap.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.375">
+        <state vertical-scroll-proportion="0.0">
           <caret line="259" column="83" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="83" />
           <folding />
         </state>
@@ -950,8 +742,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58685446">
-          <caret line="302" column="108" selection-start-line="302" selection-start-column="108" selection-end-line="302" selection-end-column="108" />
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="231" column="22" selection-start-line="231" selection-start-column="22" selection-end-line="231" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/F15Worker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/F15Local.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6923077">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
           <folding />
         </state>
       </provider>

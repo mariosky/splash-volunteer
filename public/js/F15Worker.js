@@ -29,7 +29,7 @@ function start(config){
 
         chromosome_size: chromosome_size,
         fitness_func: compute,
-        tournament_size:5,
+        tournament_size:3,
         minvalue:-5.0,
         maxvalue:5.0 } );
     //Worker uuid
