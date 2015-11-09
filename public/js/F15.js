@@ -272,5 +272,6 @@ function Test(){
 
 var f15 = exports;
 f15.compute = compute;
+f15.O = O;
 
 

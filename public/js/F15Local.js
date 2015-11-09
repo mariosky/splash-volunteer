@@ -21,6 +21,7 @@ console.log( "Testing chromosomes composed of floats...");
 console.log( "Experiment will end when fitness negative fitness is equal to 0 ");
 
 
+console.log(f15.O);
 
 
 for (var i=0; i<30; i++)
@@ -49,3 +50,5 @@ do {
 var hrend = process.hrtime(hrstart);
 console.info("Run:%d, %dms", i , hrend[0]*1000+hrend[1]/1000000);
 }
+
+console.log(F15.O)
