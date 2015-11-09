@@ -184,7 +184,7 @@ function compute (x) {
         e += gs;
     }
 
-    return (s /*
+    return (s * -1 /*
      * + Kernel.shiftedPermRastrigin(x, this.m_o, this.m_p, e,
      * this.m_dimension - e)
      */);
@@ -269,5 +269,9 @@ function Test(){
 
 }
 
+
+var f15 = exports;
+f15.compute = compute;
+f15.O = O;
 
 

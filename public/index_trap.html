@@ -50,7 +50,7 @@ padding-right: 10px;
             <li role="presentation" class="active"><a href="#">Home</a></li>
 
             <li role="presentation"><a href="/">Restart</a></li>
-            <li role="presentation"><a href="https://github.com/mariosky/splash-volunteer/tree/IEEE-CIM">Fork in Github</a></li>
+            <li role="presentation"><a href="https://github.com/mariosky/splash-volunteer">Fork in Github</a></li>
           </ul>
         </nav>
         <h3 class="text-muted">An experiment in distributed evolutionary computation 
@@ -173,17 +173,9 @@ padding-right: 10px;
 				      algorithm</a> that sends every <code>n</code>
 				  generations the best chromosome to the server, receiving a
 				  random one. Each row above represents a worker process showing the best chromosome so
-				  far.</p>
-                <h4> Benchmark Function </h4>
-                <p>Our benchmark is based on the Rastrigin Function with 1000 Dimensions. Rastrigin function of two variables: </p>
-                <img class="img-responsive  center-block"  src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Rastrigin_function.png/300px-Rastrigin_function.png" alt="Rastrigin"/>
-                <p>And we also added a little more complexity: </p>
-
-                <img class="img-responsive  center-block" src="https://s3.amazonaws.com/mariogarcia/images/f15.png" alt=""/>
-                    <p>The algorithm is searching for the global minimum.
-                        This will happen when a chromosome reaches zero.
-                        Help us find it.
-                        You can press Re-start in any moment to replace a worker with a new one.</p>
+				  far in shades of gray. The best one will be all black; the
+				  algorithm of the worker will stop when it finds it. You can press Re-start in any moment to
+                  replace a worker with a new one.</p>
 		  	</div>
 	  </div>
 		 </div>
@@ -228,12 +220,15 @@ padding-right: 10px;
 
 
   var config = {  
-      populatiom_min:500,
-      population_max:500,
+      populatiom_min:128,
+      population_max:256,
       random_population:true,
-      period :  100,
-      population_size : 500
 
+      population_size : 128,
+        period :  100,
+        traps : 40,
+      trap_len : 4,
+        trap_b :  2
   }
 
 
@@ -259,28 +254,26 @@ padding-right: 10px;
         ]
     }
 
-    fitness_chart_w1 = new Chart(fitness_w1).Line( fitness_data_w1, {  responsive: false,  animation: false ,  maintainAspectRatio: true, bezierCurve: false});
+    fitness_chart_w1 = new Chart(fitness_w1).Line( fitness_data_w1, {  responsive: false,  animation: false ,  maintainAspectRatio: true});
 
     chromosome_data_w1 ={
-        labels :  Array.apply(null, new Array(160)).map(String.prototype.valueOf,""),
+        labels : Array.apply(null, new Array(160)).map(String.prototype.valueOf,""),
         datasets : [
             {
-                fillColor : "rgba(172,194,132,0.4)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor : "#fff",
-                pointStrokeColor : "#9DB86D",
-                data : Array.apply(null, new Array(1000)).map(Number.prototype.valueOf,0)
+            fillColor:  "rgba(0,0,0,0.8)",
+            strokeColor: "rgba(0,0,0,0.8)",
+            data : Array.apply(null, new Array(160)).map(Number.prototype.valueOf,0),
             }
         ]
     }
 
-    chromosome_chart_w1 = new Chart(chromosome_w1).Line(chromosome_data_w1,
+    chromosome_chart_w1 = new Chart(chromosome_w1).Bar(chromosome_data_w1, 
 
                     {
-                        bezierCurve: false, responsive: false, animation: false,pointDot : false,
-                        datasetFill : false
-
-
+                        scaleBeginAtZero : true,scaleShowGridLines : false,scaleShowHorizontalLines: false,
+                        scaleShowVerticalLines: true, barShowStroke : false, barStrokeWidth : 0, barValueSpacing : 0,
+                        barDatasetSpacing : 0,responsive: false, maintainAspectRatio: false ,  animation: false ,  
+                        maintainAspectRatio: true 
 
                     });
 
@@ -300,33 +293,34 @@ padding-right: 10px;
 
     fitness_chart_w2 = new Chart(fitness_w2).Line( fitness_data_w2, 
                 {
-                        responsive: false,  animation: false ,  maintainAspectRatio: true,bezierCurve: false
+                        responsive: false,  animation: false ,  maintainAspectRatio: true
 
                     });
-
-  chromosome_data_w2 ={
-      labels :  Array.apply(null, new Array(160)).map(String.prototype.valueOf,""),
-      datasets : [
-          {
-              fillColor : "rgba(172,194,132,0.4)",
-              strokeColor: "rgba(151,187,205,1)",
-              pointColor : "#fff",
-              pointStrokeColor : "#9DB86D",
-              data : Array.apply(null, new Array(1000)).map(Number.prototype.valueOf,0)
-          }
-      ]
-  }
-
-  chromosome_chart_w2 = new Chart(chromosome_w2).Line(chromosome_data_w2,
-
-          {
-              bezierCurve: false, responsive: false, animation: false,pointDot : false,
-              datasetFill : false
+    
+    chromosome_data_w2 ={
+        labels : Array.apply(null, new Array(160)).map(String.prototype.valueOf,""),
+        datasets : [
+            {
+            fillColor:  "rgba(0,0,0,0.8)",
+            strokeColor: "rgba(0,0,0,0.8)",
+            //highlightFill: "rgba(220,220,220,0.75)",
+            //highlightStroke: "rgba(220,220,220,1)",
+            data : Array.apply(null, new Array(160)).map(Number.prototype.valueOf,0),
+            }
+        ]
+    }
 
 
 
-          });
+    chromosome_chart_w2 = new Chart(chromosome_w2).Bar(chromosome_data_w2, 
 
+                    {
+                        scaleBeginAtZero : true,scaleShowGridLines : false,scaleShowHorizontalLines: false,
+                        scaleShowVerticalLines: true, barShowStroke : false, barStrokeWidth : 0, barValueSpacing : 0,
+                        barDatasetSpacing : 0,responsive: false, maintainAspectRatio: false ,  animation: false ,  
+                        maintainAspectRatio: true 
+
+                    });
 
 
 
@@ -421,7 +415,7 @@ padding-right: 10px;
         if(typeof(Worker) !== "undefined") {
           if(typeof(worker_2) == "undefined") {
 
-              worker_2 = new Worker('js/F15Worker.js');
+              worker_2 = new Worker('js/trapWorker.js');
 
           }
         }
@@ -431,7 +425,7 @@ padding-right: 10px;
           if (e.data.status !== undefined)
     {
 
-
+      console.log('w2:'+e.data.status); 
       switch(e.data.status) {
         case 'created':
           document.getElementById('w2_status').textContent='Created';
@@ -441,27 +435,25 @@ padding-right: 10px;
           break;
         
         case 'working':
-            document.getElementById('w2_status').textContent='Working';
-            if (fitness_data_w2.labels.length > 10)
-            {
-                fitness_chart_w2.removeData( );
-            }
-
-            fitness_chart_w2.addData([e.data.fitness*-1],e.data.generation_count);
-            fitness_chart_w2.update();
-
-
-            for (i = 0; i < e.data.best.length; i++) {
-                chromosome_chart_w2.datasets[0].points[i].value = e.data.best[i]* -1;
-            }
-
-
-            chromosome_chart_w2.update();
-
-            document.getElementById('w2_gen').textContent=e.data.generation_count.toString();
-            document.getElementById('w2_best').textContent=e.data.fitness*-1;
-            document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
-            break;
+          document.getElementById('w2_status').textContent='Working';
+          if (fitness_data_w2.labels.length > 10)
+          {
+            fitness_chart_w2.removeData( );
+          }
+    
+          fitness_chart_w2.addData([e.data.fitness],e.data.generation_count);
+          fitness_chart_w2.update();
+    
+          for (var i=0; i<e.data.best.length; i++)
+          {
+          chromosome_chart_w2.datasets[0].bars[i].value =e.data.best[i];
+        
+          }
+          chromosome_chart_w2.update();
+          document.getElementById('w2_gen').textContent=e.data.generation_count;
+          document.getElementById('w2_best').textContent=e.data.fitness;
+          document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
+          break;
       case 'finished':
 
             if  (worker_2.count == 0) {
@@ -511,7 +503,7 @@ padding-right: 10px;
 
       if(typeof(Worker) !== "undefined") {
           if(typeof(worker_1) == "undefined") {
-              worker_1 = new Worker('js/F15Worker.js');
+              worker_1 = new Worker('js/trapWorker.js');
 
           }
         }
@@ -538,22 +530,17 @@ padding-right: 10px;
             fitness_chart_w1.removeData( );
           }
 
-          fitness_chart_w1.addData([e.data.fitness*-1],e.data.generation_count);
+          fitness_chart_w1.addData([e.data.fitness],e.data.generation_count);
           fitness_chart_w1.update();
 
-          //chromosome_chart_w1.addData(e.data.best.slice(0,1),"");
+          for (var i=0; i<e.data.best.length; i++)
+          {
+          chromosome_chart_w1.datasets[0].bars[i].value =e.data.best[i];
 
-
-
-          for (i = 0; i < e.data.best.length; i++) {
-              chromosome_chart_w1.datasets[0].points[i].value = e.data.best[i]*-1;
           }
-
-
           chromosome_chart_w1.update();
-
           document.getElementById('w1_gen').textContent=e.data.generation_count.toString();
-          document.getElementById('w1_best').textContent=e.data.fitness*-1;
+          document.getElementById('w1_best').textContent=e.data.fitness;
           document.getElementById('ips').textContent= e.data.ips +' User(s) Collaborating';
           break;
 
