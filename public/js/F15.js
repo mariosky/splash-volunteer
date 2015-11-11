@@ -65,6 +65,7 @@ function createShiftVector( dim,  min,  max) {
 
 
 
+
 function createRotMatrix(dim) {
     var m;
     var i, j, k;
@@ -272,6 +273,7 @@ function Test(){
 
 var f15 = exports;
 f15.compute = compute;
-f15.O = O;
+f15.createShiftVector = createShiftVector;
+
 
 

@@ -21,6 +21,37 @@ self.addEventListener('message', function(e) {
 
 function start(config){
 
+
+    /// TEST 10K
+
+
+/*
+    var v = createShiftVector(1000,-5,5);
+
+
+    for (var i=0; i<30; i++) {
+         var t0 = performance.now();
+
+        for (var j=0; j<10000; j++) {
+
+            var r = compute(v);
+        }
+
+          var t1 = performance.now();
+
+          console.log( (t1 - t0) + ","+config.worker_uuid)
+
+
+
+    }
+
+*/
+
+
+
+
+
+
     var population_size = config.population_size || 500;
     var chromosome_size = config.chromosome_size || 1000;
     period = config.period;
